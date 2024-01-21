@@ -1,0 +1,116 @@
+﻿<Page
+    x:Class="GeoTectAI.Views.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="clr-namespace:GeoTectAI.Helpers"
+    xmlns:local="clr-namespace:GeoTectAI.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    Title="SettingsPage"
+    d:DataContext="{d:DesignInstance local:SettingsPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    </Page.Resources>
+
+    <StackPanel>
+        <ui:CardControl>
+            <ui:CardControl.Icon>
+                <ui:SymbolIcon Symbol="DarkTheme24"/>
+            </ui:CardControl.Icon>
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock Text="主题" FontWeight="Bold"/>
+                    <TextBlock Text="选择您的软件主题" FontSize="12"/>
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ui:CardControl.Content>
+                <ComboBox SelectedIndex="{Binding ViewModel.CurrentTheme}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ViewModel.ChangeThemeCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Content="Light" />
+                    <ComboBoxItem Content="Dark"/>
+                </ComboBox>
+            </ui:CardControl.Content>
+        </ui:CardControl>
+        <ui:CardControl Margin="0 8 0 0">
+            <ui:CardControl.Icon>
+                <ui:SymbolIcon Symbol="LocalLanguage24"/>
+            </ui:CardControl.Icon>
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock Text="语言" FontWeight="Bold"/>
+                    <TextBlock Text="选择您的软件语言" FontSize="12"/>
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ui:CardControl.Content>
+                <ComboBox SelectedIndex="{Binding ViewModel.CurrentLanguage}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ViewModel.ChangeLanguageCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Content="简体中文"/>
+                    <ComboBoxItem Content="English(US)"/>
+                </ComboBox>
+            </ui:CardControl.Content>
+        </ui:CardControl>
+
+        <!--关于-->
+        <TextBlock
+            Margin="0,24,0,10"
+            FontSize="20"
+            FontWeight="Medium"
+            Text="关于" />
+        <ui:CardExpander IsExpanded="True" CornerRadius="8" Margin="0 0 0 20">
+            <ui:CardExpander.Icon>
+                <ui:SymbolIcon Symbol="DataUsageToolbox24"/>
+            </ui:CardExpander.Icon>
+            <ui:CardExpander.Header>
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="GeoTectAI" FontWeight="Bold"/>
+                        <TextBlock Text="根据您的岩浆岩全岩地球化学元素预测您的大地构造环境" FontSize="12"/>
+                    </StackPanel>
+                    <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <!--<ui:Button Content="123" 
+                                   Margin="0 0 10 0"/>-->
+                        <TextBlock Text="版本："  VerticalAlignment="Center" Margin="0 0 20 0"/>
+                    </WrapPanel>
+                </Grid>
+            </ui:CardExpander.Header>
+            <ui:CardExpander.Content>
+                <StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="项目支持" Margin="0 5"/>
+                        <WrapPanel>
+                            <ui:Hyperlink Content="WPF-UI" NavigateUri="https://wpfui.lepo.co/index.html"/>
+                            <ui:Hyperlink Content="CommunityToolkit.Mvvm" NavigateUri="https://www.nuget.org/packages/CommunityToolkit.Mvvm"/>
+                            <ui:Hyperlink Content="SQLite" NavigateUri="https://www.sqlite.org/index.html"/>
+                            <ui:Hyperlink Content="EPPlus" NavigateUri="https://www.epplussoftware.com/"/>
+                            <ui:Hyperlink Content="Ookii.Dialogs.Wpf" NavigateUri="https://www.ookii.org/software/dialogs/"/>
+                            <ui:Hyperlink Content="Microsoft.Extensions.Hosting" NavigateUri="https://www.nuget.org/packages/Microsoft.Extensions.Hosting/"/>
+                            <ui:Hyperlink Content="Microsoft.Xaml.Behaviors.Wpf" NavigateUri="https://www.nuget.org/packages/Microsoft.Xaml.Behaviors.Wpf"/>
+                        </WrapPanel>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="123" Margin="0 5"/>
+                        <TextBlock Text="123" 
+                                   Margin="10 5 0 0"/>
+                    </StackPanel>
+                </StackPanel>
+            </ui:CardExpander.Content>
+        </ui:CardExpander>
+    </StackPanel>
+</Page>
