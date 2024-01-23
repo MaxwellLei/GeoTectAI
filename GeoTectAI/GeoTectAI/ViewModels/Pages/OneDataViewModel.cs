@@ -1,7 +1,13 @@
 ﻿using GeoTectAI.Models;
 using GeoTectAI.Services;
+using LiveChartsCore;
+using LiveChartsCore.Kernel.Sketches;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,6 +86,19 @@ namespace GeoTectAI.ViewModels.Pages
         [ObservableProperty]
         private float _Lu;
 
+        [ObservableProperty]
+        private int _modelIndex;
+
+        //图表内容
+        [ObservableProperty]
+        private ObservableCollection<ISeries> _myChartSeries;
+
+        [ObservableProperty]
+        private ObservableCollection<Axis> _xAxes;
+
+        [ObservableProperty]
+        private ObservableCollection<ISeries> _yAxes;
+
         private bool _isInitialized = false;
 
         public void OnNavigatedTo()
@@ -93,22 +112,88 @@ namespace GeoTectAI.ViewModels.Pages
         private void InitializeViewModel()
         {
             _isInitialized = true;
+            //设置图表中文字体支持
+            LiveCharts.Configure(config => config.HasGlobalSKTypeface(SKFontManager.Default.MatchCharacter('汉')));
         }
 
+        //绘图
+        private void PintChart(ObservableCollection<ISeries> tempSeries)
+        {
+            // 构造环境名称
+            ObservableCollection<string> Categories = new ObservableCollection<string>
+            { "类别1", "类别2", "类别3", "类别4", "类别5", "类别6", "类别7", "类别8" };
+
+            MyChartSeries = tempSeries;
+            // 创建堆积线图的数据系列
+            //MyChartSeries = new ObservableCollection<ISeries>
+            //{
+            //    new LineSeries<double>
+            //    {
+            //        Values = new List<double> { 10, 20, 30, 40, 50, 60, 70, 80 },
+            //        Name = "系列1"
+            //    },
+            //    new LineSeries<double>
+            //    {
+            //        Values = new List<double> { 15, 25, 35, 45, 55, 65, 75, 85 },
+            //        Name = "系列2"
+            //    }
+            //    // 可以根据需要添加更多系列
+            //};
+
+            XAxes = new ObservableCollection<Axis>
+            {
+                new Axis
+                {
+                    Labels = Categories,
+                    
+                }
+            };
+        }
+
+        //预测
         [RelayCommand]
         private async void OnPredict()
         {
-            var predictorService = new PredictorService("D:\\Work Space\\Project\\GeoTectAI\\GeoTectAI\\GeoTectAI\\Executables\\predict.exe");
-            var modelPath = "D:\\Work Space\\Project\\GeoTectAI\\GeoTectAI\\GeoTectAI\\Executables\\RandomForest_model.onnx";
-            //var features = new float[] { 0.5846253f, 0.8544842f, 0.40910038f, 0.45354682f, 0.84390426f,
-            //    0.44641337f, 0.25145847f, 0.4332255f, 0.533847f, 0.6043557f, 0.6473962f, 0.58364123f, 
-            //    0.6483353f, 0.60697925f, 0.5437231f, 0.2620916f, 0.23379433f, 0.84173906f, 0.84291583f,
-            //    0.7229303f, 0.31760728f, 0.8344309f, 0.47476304f };
+            //当前程序路径
+            string appPath = System.IO.Directory.GetCurrentDirectory();
+            //预测程序路径
+            string predictExePath = appPath + "\\Executables\\predict.exe"; ; 
+            //人工神经网络模型路径
+            string ann_modelPath = appPath + "\\Resources\\ML_Model\\ANN_model.onnx";
+            //随机模型路径
+            string randomForest_modelPath = appPath + "\\Resources\\ML_Model\\RandomForest_model.onnx";
+            //XGB模型路径
+            string xGBoosting_modelPath = appPath + "\\Resources\\ML_Model\\XGBoosting_model.onnx";
+            //预测数据
             var features = new float[] { SiO2, TiO2, Al2O3, CaO, MgO, MnO, K2O, Na2O, P2O5, La, Ce, Pr, Nd, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu };
+            PredictorService predictorService = new PredictorService(predictExePath);
+            if (ModelIndex == 0)
+            {
+                
+                var (predictedClass1, probabilities1) = await predictorService.PredictAsync(ann_modelPath, features);
+                var (predictedClass2, probabilities2) = await predictorService.PredictAsync(randomForest_modelPath, features);
+                var (predictedClass3, probabilities3) = await predictorService.PredictAsync(xGBoosting_modelPath, features);
 
-            var (predictedClass, probabilities) = await predictorService.PredictAsync(modelPath, features);
-            Console.WriteLine($"Predicted class: {predictedClass}");
-            Console.WriteLine($"Probabilities: {string.Join(", ", probabilities)}");
+                ObservableCollection <ISeries> tempSeries = new ObservableCollection<ISeries>
+                {
+                    new LineSeries<double>
+                    {
+                        Values = (probabilities1.ToList()).Select(f => (double)f).ToList(),
+                        Name = "系列1"
+                    },
+                    new LineSeries<double>
+                    {
+                        Values = (probabilities2.ToList()).Select(f => (double)f).ToList(),
+                        Name = "系列2"
+                    },
+                    new LineSeries<double>
+                    {
+                        Values = (probabilities3.ToList()).Select(f => (double)f).ToList(),
+                        Name = "系列3"
+                    }
+                };
+                PintChart(tempSeries);
+            }
 
         }
     }

@@ -5,6 +5,7 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
       xmlns:local="clr-namespace:GeoTectAI.Views.Pages"
       mc:Ignorable="d" 
       d:DataContext="{d:DesignInstance local:OneDataPage,
@@ -19,6 +20,7 @@
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.01*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ui:CardControl>
@@ -33,13 +35,13 @@
             </ui:CardControl.Header>
             <ui:CardControl.Content>
                 <DockPanel>
-                    <ComboBox SelectedIndex="0">
+                    <ComboBox SelectedIndex="{Binding ViewModel.ModelIndex}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding ViewModel.ChangeThemeCommand}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
-                        <ComboBoxItem Content="综合" />
+                        <ComboBoxItem Content="综合"/>
                         <ComboBoxItem Content="随机森林"/>
                         <ComboBoxItem Content="XGBooting"/>
                         <ComboBoxItem Content="人工神经网络"/>
@@ -204,8 +206,13 @@
                 </Grid>
             </ui:CardExpander.Content>
         </ui:CardExpander>
-        <Grid Grid.Row="3">
-            <TextBlock Text="123"/>
+        <!--关于-->
+        <TextBlock Grid.Row="3" FontSize="20" FontWeight="Bold"  Text="预测结果" Margin="0 5"/>
+        <Grid Grid.Row="4">
+            <lvc:CartesianChart Series="{Binding ViewModel.MyChartSeries}"
+                                XAxes="{Binding ViewModel.XAxes}"
+                                YAxes="{Binding ViewModel.YAxes}"
+                                />
         </Grid>
     </Grid>
 </Page>
