@@ -1,0 +1,211 @@
+﻿<Page x:Class="GeoTectAI.Views.Pages.OneDataPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GeoTectAI.Views.Pages"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance local:OneDataPage,
+                                     IsDesignTimeCreatable=False}"
+      d:DesignHeight="450" d:DesignWidth="800"
+      ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+      ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      Title="OneDataPage" ScrollViewer.CanContentScroll="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ui:CardControl>
+            <ui:CardControl.Icon>
+                <ui:SymbolIcon Symbol="DarkTheme24"/>
+            </ui:CardControl.Icon>
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock Text="模型" FontWeight="Bold"/>
+                    <TextBlock Text="选择您的预测模型" FontSize="12"/>
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ui:CardControl.Content>
+                <DockPanel>
+                    <ComboBox SelectedIndex="0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding ViewModel.ChangeThemeCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ComboBoxItem Content="综合" />
+                        <ComboBoxItem Content="随机森林"/>
+                        <ComboBoxItem Content="XGBooting"/>
+                        <ComboBoxItem Content="人工神经网络"/>
+                    </ComboBox>
+                    <Button Content="预测" Margin="5 0" VerticalAlignment="Stretch"
+                            Command="{Binding ViewModel.PredictCommand}"/>
+                </DockPanel>
+                
+            </ui:CardControl.Content>
+        </ui:CardControl>
+        
+        <!--主量元素-->
+        <ui:CardExpander Grid.Row="1" Margin="0 5">
+            <ui:CardExpander.Icon>
+                <ui:SymbolIcon Symbol="DatabaseMultiple20"/>
+            </ui:CardExpander.Icon>
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock Text="全岩主量元素" FontWeight="Bold"/>
+                    <TextBlock Text="123" FontSize="12"/>
+                </StackPanel>
+            </ui:CardExpander.Header>
+            <ui:CardExpander.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.03*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.03*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DockPanel>
+                        <TextBlock Text="SIO2：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.SiO2,Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="0" Grid.Column="2">
+                        <TextBlock Text="TiO2：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.TiO2}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="0" Grid.Column="5">
+                        <TextBlock Text="Al2O3：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Al2O3}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="1" Grid.Column="0" Margin="0 5">
+                        <TextBlock Text="CaO：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.CaO}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="1" Grid.Column="2" Margin="0 5">
+                        <TextBlock Text="MgO：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.MgO}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="1" Grid.Column="5" Margin="0 5">
+                        <TextBlock Text="MnO：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.MnO}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="2" Grid.Column="0">
+                        <TextBlock Text="K2O：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.K2O}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="2" Grid.Column="2">
+                        <TextBlock Text="Na2O：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Na2O}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="2" Grid.Column="5">
+                        <TextBlock Text="P2O5：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.P2O5}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                </Grid>
+            </ui:CardExpander.Content>
+        </ui:CardExpander>
+        
+        <!--微量元素-->
+        <ui:CardExpander Grid.Row="2">
+            <ui:CardExpander.Icon>
+                <ui:SymbolIcon Symbol="DatabaseMultiple20"/>
+            </ui:CardExpander.Icon>
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock Text="全岩微量元素" FontWeight="Bold"/>
+                    <TextBlock Text="123" FontSize="12"/>
+                </StackPanel>
+            </ui:CardExpander.Header>
+            <ui:CardExpander.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.03*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.03*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DockPanel>
+                        <TextBlock Text="La：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.La}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="0" Grid.Column="2">
+                        <TextBlock Text="Ce：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Ce}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="0" Grid.Column="5">
+                        <TextBlock Text="Pr：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Pr}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="1" Grid.Column="0" Margin="0 5">
+                        <TextBlock Text="Nd：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Nd}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="1" Grid.Column="2" Margin="0 5">
+                        <TextBlock Text="Sm：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Sm}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="1" Grid.Column="5" Margin="0 5">
+                        <TextBlock Text="Eu：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Eu}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="2" Grid.Column="0" >
+                        <TextBlock Text="Gd：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Gd}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="2" Grid.Column="2">
+                        <TextBlock Text="Tb：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Tb}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="2" Grid.Column="5">
+                        <TextBlock Text="Dy：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Dy}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="3" Grid.Column="0" Margin="0 5">
+                        <TextBlock Text="Ho：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Ho}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="3" Grid.Column="2" Margin="0 5">
+                        <TextBlock Text="Er：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Er}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="3" Grid.Column="5" Margin="0 5">
+                        <TextBlock Text="Tm：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Tm}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="4" Grid.Column="0">
+                        <TextBlock Text="Yb：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Yb}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="4" Grid.Column="2">
+                        <TextBlock Text="Lu：" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding ViewModel.Lu}" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                </Grid>
+            </ui:CardExpander.Content>
+        </ui:CardExpander>
+        <Grid Grid.Row="3">
+            <TextBlock Text="123"/>
+        </Grid>
+    </Grid>
+</Page>
