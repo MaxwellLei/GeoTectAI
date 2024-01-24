@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using GeoTectAI.Services;
 using GeoTectAI.ViewModels.Windows;
 using Wpf.Ui.Controls;
 
@@ -32,6 +33,9 @@ namespace GeoTectAI.Views.Windows
             contentDialogService.SetContentPresenter(RootContentDialog);
 
             NavigationView.SetServiceProvider(serviceProvider);
+
+            MessageService.SnackbarPresenter = SnackbarPresenter;
+            MessageService.ContentPresenter = RootContentDialog;
         }
     }
 }

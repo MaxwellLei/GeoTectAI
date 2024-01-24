@@ -22,6 +22,10 @@ namespace GeoTectAI.ViewModels.Pages
         [ObservableProperty]
         private int? _currentLanguage;
 
+        //弹窗模式【0，静默通知；1，弹窗通知】
+        [ObservableProperty]
+        private int? _currentPopUp;
+
         [ObservableProperty]
         private string _appVersion = String.Empty;
 
@@ -36,7 +40,7 @@ namespace GeoTectAI.ViewModels.Pages
         private void InitializeViewModel()
         {
             //CurrentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
-            //AppVersion = $"GeoTectAI - {GetAssemblyVersion()}";
+            AppVersion = $"{GetAssemblyVersion()}";
             ConfigInit();   //初始化设置
             _isInitialized = true;
         }
@@ -46,6 +50,7 @@ namespace GeoTectAI.ViewModels.Pages
         {
             CurrentTheme = Convert.ToInt32(ConfigHelper.ReadConfig("Theme"));
             CurrentLanguage = Convert.ToInt32(ConfigHelper.ReadConfig("Language"));
+            CurrentPopUp = Convert.ToInt32(ConfigHelper.ReadConfig("NotificationMode"));
         }
 
 
@@ -93,6 +98,17 @@ namespace GeoTectAI.ViewModels.Pages
                 }
                 //写入配置文件
                 ConfigHelper.WriteConfig("Language", CurrentLanguage.ToString());
+            }
+        }
+
+        //弹窗模式
+        [RelayCommand]
+        private void OnChangePopUpMode()
+        {
+            if (CurrentPopUp != null)
+            {
+                //写入配置文件
+                ConfigHelper.WriteConfig("NotificationMode", CurrentPopUp.ToString());
             }
         }
     }

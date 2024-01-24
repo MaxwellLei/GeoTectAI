@@ -66,6 +66,29 @@
                 </ComboBox>
             </ui:CardControl.Content>
         </ui:CardControl>
+        <!--通知-->
+        <ui:CardControl Margin="0 8 0 0">
+            <ui:CardControl.Icon>
+                <ui:SymbolIcon Symbol="CommentNote24"/>
+            </ui:CardControl.Icon>
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock Text="通知" FontWeight="Bold"/>
+                    <TextBlock Text="选择您的通知方式" FontSize="12"/>
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ui:CardControl.Content>
+                <ComboBox SelectedIndex="{Binding ViewModel.CurrentPopUp}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ViewModel.ChangePopUpModeCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Name="SilentNotification" Content="静默通知"/>
+                    <ComboBoxItem Content="弹窗通知"/>
+                </ComboBox>
+            </ui:CardControl.Content>
+        </ui:CardControl>
 
         <!--关于-->
         <TextBlock
@@ -84,31 +107,30 @@
                         <TextBlock Text="根据您的岩浆岩全岩地球化学元素预测您的大地构造环境" FontSize="12"/>
                     </StackPanel>
                     <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <!--<ui:Button Content="123" 
-                                   Margin="0 0 10 0"/>-->
-                        <TextBlock Text="版本："  VerticalAlignment="Center" Margin="0 0 20 0"/>
+                        <TextBlock Text="版本："  VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding ViewModel.AppVersion}" Margin=" 0 0 10 0"/>
                     </WrapPanel>
                 </Grid>
             </ui:CardExpander.Header>
             <ui:CardExpander.Content>
                 <StackPanel>
                     <StackPanel>
-                        <TextBlock Text="项目支持" Margin="0 5"/>
+                        <TextBlock Text="项目依赖支持" Margin="0 5"/>
                         <WrapPanel>
                             <ui:Hyperlink Content="WPF-UI" NavigateUri="https://wpfui.lepo.co/index.html"/>
                             <ui:Hyperlink Content="CommunityToolkit.Mvvm" NavigateUri="https://www.nuget.org/packages/CommunityToolkit.Mvvm"/>
-                            <ui:Hyperlink Content="SQLite" NavigateUri="https://www.sqlite.org/index.html"/>
                             <ui:Hyperlink Content="EPPlus" NavigateUri="https://www.epplussoftware.com/"/>
                             <ui:Hyperlink Content="Ookii.Dialogs.Wpf" NavigateUri="https://www.ookii.org/software/dialogs/"/>
                             <ui:Hyperlink Content="Microsoft.Extensions.Hosting" NavigateUri="https://www.nuget.org/packages/Microsoft.Extensions.Hosting/"/>
                             <ui:Hyperlink Content="Microsoft.Xaml.Behaviors.Wpf" NavigateUri="https://www.nuget.org/packages/Microsoft.Xaml.Behaviors.Wpf"/>
+                            <ui:Hyperlink Content="LiveChartsCore.SkiaSharpView.WPF" NavigateUri="https://github.com/beto-rodriguez/LiveCharts2"/>
                         </WrapPanel>
                     </StackPanel>
-                    <StackPanel>
+                    <!--<StackPanel>
                         <TextBlock Text="123" Margin="0 5"/>
                         <TextBlock Text="123" 
                                    Margin="10 5 0 0"/>
-                    </StackPanel>
+                    </StackPanel>-->
                 </StackPanel>
             </ui:CardExpander.Content>
         </ui:CardExpander>

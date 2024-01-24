@@ -34,7 +34,14 @@ namespace GeoTectAI.ViewModels.Windows
                         Content = "单项预测",
                         Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                         TargetPageType = typeof(Views.Pages.OneDataPage)
+                    },
+                    new NavigationViewItem()
+                    {
+                        Content = "批量预测",
+                        Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                        TargetPageType = typeof(Views.Pages.MultipleDataPage)
                     }
+
                 }
                 
             } 

@@ -2,21 +2,28 @@
 using GeoTectAI.Services;
 using LiveChartsCore;
 using LiveChartsCore.Kernel.Sketches;
+using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Extensions;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using Wpf.Ui.Controls;
 
 namespace GeoTectAI.ViewModels.Pages
 {
     public partial class OneDataViewModel : ObservableObject, INavigationAware
     {
+        [ObservableProperty]
+        private Visibility isLoadVisible = Visibility.Hidden;
+
         [ObservableProperty]
         private float _SiO2;
 
@@ -94,10 +101,16 @@ namespace GeoTectAI.ViewModels.Pages
         private ObservableCollection<ISeries> _myChartSeries;
 
         [ObservableProperty]
+        private ObservableCollection<ISeries> _myNightingaleRoseChartSeries;
+
+        [ObservableProperty]
         private ObservableCollection<Axis> _xAxes;
 
         [ObservableProperty]
-        private ObservableCollection<ISeries> _yAxes;
+        private ObservableCollection<Axis> _yAxes;
+
+        [ObservableProperty]
+        private SolidColorPaint _legendTextPaint = new SolidColorPaint(SKColors.DeepSkyBlue);
 
         private bool _isInitialized = false;
 
@@ -116,85 +129,113 @@ namespace GeoTectAI.ViewModels.Pages
             LiveCharts.Configure(config => config.HasGlobalSKTypeface(SKFontManager.Default.MatchCharacter('汉')));
         }
 
-        //绘图
-        private void PintChart(ObservableCollection<ISeries> tempSeries)
+        //堆折线图绘图
+        private void PaintStackedLineChart(ObservableCollection<ISeries> tempSeries)
         {
             // 构造环境名称
             ObservableCollection<string> Categories = new ObservableCollection<string>
-            { "类别1", "类别2", "类别3", "类别4", "类别5", "类别6", "类别7", "类别8" };
+            { "1", "2", "3", "4", "5", "6", "7", "8" };
 
             MyChartSeries = tempSeries;
-            // 创建堆积线图的数据系列
-            //MyChartSeries = new ObservableCollection<ISeries>
-            //{
-            //    new LineSeries<double>
-            //    {
-            //        Values = new List<double> { 10, 20, 30, 40, 50, 60, 70, 80 },
-            //        Name = "系列1"
-            //    },
-            //    new LineSeries<double>
-            //    {
-            //        Values = new List<double> { 15, 25, 35, 45, 55, 65, 75, 85 },
-            //        Name = "系列2"
-            //    }
-            //    // 可以根据需要添加更多系列
-            //};
 
             XAxes = new ObservableCollection<Axis>
             {
                 new Axis
                 {
                     Labels = Categories,
-                    
+                    LabelsPaint = new SolidColorPaint(SKColors.DeepSkyBlue)
                 }
             };
+
+            YAxes = new ObservableCollection<Axis>
+            {
+                new Axis
+                {
+                    LabelsPaint = new SolidColorPaint(SKColors.DeepSkyBlue)
+                }
+            };
+        }
+
+        //夜莺玫瑰绘图
+        private void PaintNightingaleRoseChart(ObservableCollection<ISeries> basicBarsSeries)
+        {
+
+            MyNightingaleRoseChartSeries = basicBarsSeries;
+        }
+
+        private void AddToSeries(ObservableCollection<ISeries> seriesCollection, float[] probabilities, string modelName)
+        {
+            seriesCollection.Add(new LineSeries<double>
+            {
+                Values = probabilities.Select(f => (double)f).ToList(),
+                Name = modelName
+            });
+        }
+
+        private void AddToSeries(ObservableCollection<ISeries> basicBarsSeries, int preClass, string modelName)
+        {
+            basicBarsSeries.Add(new ColumnSeries<int>
+            {
+                Values = Enumerable.Repeat(preClass + 1, 1),
+                Name = modelName
+            }) ;
         }
 
         //预测
         [RelayCommand]
         private async void OnPredict()
         {
-            //当前程序路径
+            //加载进度条
+            IsLoadVisible = Visibility.Visible;
+            // 获取当前程序路径
             string appPath = System.IO.Directory.GetCurrentDirectory();
-            //预测程序路径
-            string predictExePath = appPath + "\\Executables\\predict.exe"; ; 
-            //人工神经网络模型路径
-            string ann_modelPath = appPath + "\\Resources\\ML_Model\\ANN_model.onnx";
-            //随机模型路径
-            string randomForest_modelPath = appPath + "\\Resources\\ML_Model\\RandomForest_model.onnx";
-            //XGB模型路径
-            string xGBoosting_modelPath = appPath + "\\Resources\\ML_Model\\XGBoosting_model.onnx";
-            //预测数据
+
+            // 路径字典，方便根据ModelIndex索引模型
+            var models = new Dictionary<int, (string path, string name)>
+            {
+                { 3, (appPath + "\\Resources\\ML_Model\\ANN_model.onnx", "人工神经网络") },
+                { 1, (appPath + "\\Resources\\ML_Model\\RandomForest_model.onnx", "随机森林") },
+                { 2, (appPath + "\\Resources\\ML_Model\\XGBoosting_model.onnx", "XGBooting") },
+            };
+
+            // 预测数据
             var features = new float[] { SiO2, TiO2, Al2O3, CaO, MgO, MnO, K2O, Na2O, P2O5, La, Ce, Pr, Nd, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu };
+
+            // 预测服务
+            string predictExePath = appPath + "\\Executables\\predict.exe";
             PredictorService predictorService = new PredictorService(predictExePath);
+
+            // 生成图表数据
+            ObservableCollection<ISeries> tempSeries = new ObservableCollection<ISeries>();
+            ObservableCollection<ISeries> preClassSeries = new ObservableCollection<ISeries>();
+
             if (ModelIndex == 0)
             {
-                
-                var (predictedClass1, probabilities1) = await predictorService.PredictAsync(ann_modelPath, features);
-                var (predictedClass2, probabilities2) = await predictorService.PredictAsync(randomForest_modelPath, features);
-                var (predictedClass3, probabilities3) = await predictorService.PredictAsync(xGBoosting_modelPath, features);
-
-                ObservableCollection <ISeries> tempSeries = new ObservableCollection<ISeries>
+                foreach (var model in models.Values)
                 {
-                    new LineSeries<double>
-                    {
-                        Values = (probabilities1.ToList()).Select(f => (double)f).ToList(),
-                        Name = "系列1"
-                    },
-                    new LineSeries<double>
-                    {
-                        Values = (probabilities2.ToList()).Select(f => (double)f).ToList(),
-                        Name = "系列2"
-                    },
-                    new LineSeries<double>
-                    {
-                        Values = (probabilities3.ToList()).Select(f => (double)f).ToList(),
-                        Name = "系列3"
-                    }
-                };
-                PintChart(tempSeries);
+                    var (predictedClass, probabilities) = await predictorService.PredictAsync(model.path, features);
+                    AddToSeries(preClassSeries, predictedClass, model.name);
+                    AddToSeries(tempSeries, probabilities, model.name);
+                }
+            }
+            else if (models.ContainsKey(ModelIndex))
+            {
+                var model = models[ModelIndex];
+                var (predictedClass, probabilities) = await predictorService.PredictAsync(model.path, features);
+                AddToSeries(preClassSeries, predictedClass, model.name);
+                AddToSeries(tempSeries, probabilities, model.name);
+            }
+            else
+            {
+                Console.WriteLine("警告：超出索引");
             }
 
+            // 绘制图表
+            PaintStackedLineChart(tempSeries);
+            PaintNightingaleRoseChart(preClassSeries);
+
+            IsLoadVisible = Visibility.Hidden;
+            MessageService.AutoShowDialog("成功", "预测完成", ControlAppearance.Success);
         }
     }
 }

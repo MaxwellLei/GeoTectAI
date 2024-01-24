@@ -46,6 +46,8 @@ namespace GeoTectAI
                 services.AddSingleton<DashboardViewModel>();
                 services.AddSingleton<OneDataPage>();
                 services.AddSingleton<OneDataViewModel>();
+                services.AddSingleton<MultipleDataPage>();
+                services.AddSingleton<MultipleDataViewModel>();
                 services.AddSingleton<DataPage>();
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
