@@ -12,3 +12,12 @@
 
 # 项目截图
 
+![image](https://github.com/MaxwellLei/GeoTectAI/assets/57181782/26ec2b65-765a-42c1-883a-d7cc79955460)
+
+![image](https://github.com/MaxwellLei/GeoTectAI/assets/57181782/faa2022a-8648-479c-bb56-eec1cbfddca9)
+
+![image](https://github.com/MaxwellLei/GeoTectAI/assets/57181782/68d9508f-c6a1-4047-89aa-7761a75c2908)
+
+![image](https://github.com/MaxwellLei/GeoTectAI/assets/57181782/116d1065-a64c-448b-a495-5246da3ecea1)
+
+
