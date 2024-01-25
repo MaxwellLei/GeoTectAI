@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0-windows</TargetFramework>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>wpfui-icon.ico</ApplicationIcon>
+    <ApplicationIcon>LOGO_Icon.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
@@ -20,13 +20,15 @@
     <Content Include="Executables\predict.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="LOGO_Icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\ML_Model\ANN_model.onnx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ML_Model\XGBoosting_model.onnx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wpfui-icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +45,7 @@
     <None Remove="Assets\DataDistributions.png" />
     <None Remove="Assets\LOGO_Icon.png" />
     <None Remove="Executables\predict.exe" />
+    <None Remove="LOGO_Icon.ico" />
     <None Remove="Resources\ML_Model\ANN_model.onnx" />
   </ItemGroup>
 
