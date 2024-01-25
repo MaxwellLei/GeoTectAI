@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
 		Microsoft ResX Schema
 
 		Version 1.3
@@ -58,44 +58,223 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="DataPredict" xml:space="preserve">
+    <value>Data Predict</value>
+  </data>
+  <data name="UPrediction" xml:space="preserve">
+    <value>Univaricate Predict</value>
+  </data>
+  <data name="MPrediction" xml:space="preserve">
+    <value>Batch Predict</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="RF_Title" xml:space="preserve">
+    <value>Random Forest</value>
+  </data>
+  <data name="RF_Title_D" xml:space="preserve">
+    <value>An ensemble learning method using multiple decision trees for prediction. It randomly selects samples and features for training and combines predictions of all trees through voting or averaging.</value>
+  </data>
+  <data name="XGB_Title" xml:space="preserve">
+    <value>XGBoost</value>
+  </data>
+  <data name="ANN_Title" xml:space="preserve">
+    <value>ANN</value>
+  </data>
+  <data name="XGB_Title_D" xml:space="preserve">
+    <value>An efficient implementation of gradient boosting. Adds new weak learners (usually decision trees) incrementally, focusing on reducing prediction errors and improving model accuracy.</value>
+  </data>
+  <data name="ANN_Title_D" xml:space="preserve">
+    <value>Networks composed of nodes and weighted connections, inspired by biological neural networks. Includes input, hidden, and output layers, learning complex nonlinear relationships.</value>
+  </data>
+  <data name="UPrediction_D" xml:space="preserve">
+    <value>Input Your Data for Single Prediction.</value>
+  </data>
+  <data name="MPrediction_D" xml:space="preserve">
+    <value>Import Your File for Batch Prediction</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Machine Learning Model</value>
+  </data>
+  <data name="Model_D" xml:space="preserve">
+    <value>Select an Appropriate Prediction Model</value>
+  </data>
+  <data name="WholeRock_ME" xml:space="preserve">
+    <value>Whole-Rock Major Elements</value>
+  </data>
+  <data name="WholeRock_ME_D" xml:space="preserve">
+    <value>Major Chemical Elements Constituting Rocks</value>
+  </data>
+  <data name="WholeRock_TE" xml:space="preserve">
+    <value>Whole-Rock Trace Elements</value>
+  </data>
+  <data name="WholeRock_TE_D" xml:space="preserve">
+    <value>Trace Chemical Elements Constituting Rocks</value>
+  </data>
+  <data name="Prediction_Res" xml:space="preserve">
+    <value>Prediction Results</value>
+  </data>
+  <data name="Category_Mapping" xml:space="preserve">
+    <value>Category Mapping</value>
+  </data>
+  <data name="Integration" xml:space="preserve">
+    <value>Integration</value>
+  </data>
+  <data name="Predict" xml:space="preserve">
+    <value>Predict</value>
+  </data>
+  <data name="Import_File" xml:space="preserve">
+    <value>Import File</value>
+  </data>
+  <data name="Delete_Data" xml:space="preserve">
+    <value>Clear Data</value>
+  </data>
+  <data name="M_Predict" xml:space="preserve">
+    <value>Batch Predict</value>
+  </data>
+  <data name="Attribute_Config" xml:space="preserve">
+    <value>Attribute Configuration</value>
+  </data>
+  <data name="Data_Statistics" xml:space="preserve">
+    <value>Data Statistics</value>
+  </data>
+  <data name="Export_As_Excel" xml:space="preserve">
+    <value>Export as Excel</value>
+  </data>
+  <data name="Open_File_Location" xml:space="preserve">
+    <value>Open File Location</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="Theme_D" xml:space="preserve">
+    <value>Select Your Software Theme</value>
+  </data>
+  <data name="Languages" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Languages_D" xml:space="preserve">
+    <value>Select Your Software Language (Some Translations Require Restarting the Software to Take Effect)</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="Notification_D" xml:space="preserve">
+    <value>Select Your Notification Method</value>
+  </data>
+  <data name="Automatic_S_Time" xml:space="preserve">
+    <value>Automatic Shutdown</value>
+  </data>
+  <data name="Automatic_S_Time_D" xml:space="preserve">
+    <value>Shutdown Time for Messages Under Silent Notification</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="SilentNotification" xml:space="preserve">
+    <value>Silent Notification</value>
+  </data>
+  <data name="PopupNotification" xml:space="preserve">
+    <value>Popup Notification</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="About_D" xml:space="preserve">
+    <value>Predict Tectonic Setting Based on Your Mafic Rock Whole-Rock Geochemical Elements</value>
+  </data>
+  <data name="Project_Support" xml:space="preserve">
+    <value>Project Dependency Support</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version：</value>
+  </data>
+  <data name="Predicting" xml:space="preserve">
+    <value>Predicting...</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Error_1" xml:space="preserve">
+    <value>Invalid Input Data Detected, Converted to 0</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Success_1" xml:space="preserve">
+    <value>File Read Successfully</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Info_1" xml:space="preserve">
+    <value>Cancel File Import</value>
+  </data>
+  <data name="Success_2" xml:space="preserve">
+    <value>Clearing Completed</value>
+  </data>
+  <data name="Success_3" xml:space="preserve">
+    <value>Prediction Completed</value>
+  </data>
+  <data name="Error_2" xml:space="preserve">
+    <value>Please Import Data</value>
+  </data>
+  <data name="Success_4" xml:space="preserve">
+    <value>File Exported Successfully</value>
+  </data>
+  <data name="Error_3" xml:space="preserve">
+    <value>Please Perform Prediction First</value>
+  </data>
+  <data name="Success_5" xml:space="preserve">
+    <value>File Location Opened</value>
+  </data>
+  <data name="Error_4" xml:space="preserve">
+    <value>Index Out of Bounds</value>
+  </data>
 </root>

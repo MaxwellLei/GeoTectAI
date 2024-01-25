@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:lg="clr-namespace:GeoTectAI.Services"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
@@ -20,23 +21,23 @@
             <StackPanel>
                 <ui:CardControl>
                     <ui:CardControl.Icon>
-                        <ui:SymbolIcon Symbol="DarkTheme24"/>
+                        <ui:SymbolIcon Symbol="BrainCircuit24"/>
                     </ui:CardControl.Icon>
                     <ui:CardControl.Header>
                         <StackPanel>
-                            <TextBlock Text="模型" FontWeight="Bold"/>
-                            <TextBlock Text="选择您的预测模型" FontSize="12"/>
+                            <TextBlock Text="{Binding [Model],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding [Model_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
                         </StackPanel>
                     </ui:CardControl.Header>
                     <ui:CardControl.Content>
                         <DockPanel>
                             <ComboBox SelectedIndex="{Binding ViewModel.ModelIndex}">
-                                <ComboBoxItem Content="综合"/>
-                                <ComboBoxItem Content="随机森林"/>
-                                <ComboBoxItem Content="XGBooting"/>
-                                <ComboBoxItem Content="人工神经网络"/>
+                                <ComboBoxItem Content="{Binding [Integration],Source={x:Static lg:LanguageService.Instance}}"/>
+                                <ComboBoxItem Content="{Binding [RF_Title],Source={x:Static lg:LanguageService.Instance}}"/>
+                                <ComboBoxItem Content="{Binding [XGB_Title],Source={x:Static lg:LanguageService.Instance}}"/>
+                                <ComboBoxItem Content="{Binding [ANN_Title],Source={x:Static lg:LanguageService.Instance}}"/>
                             </ComboBox>
-                            <Button Content="预测" Margin="5 0" VerticalAlignment="Stretch"
+                            <Button Content="{Binding [Predict],Source={x:Static lg:LanguageService.Instance}}" Margin="5 0" VerticalAlignment="Stretch"
                             Command="{Binding ViewModel.PredictCommand}"/>
                         </DockPanel>
 
@@ -46,12 +47,12 @@
                 <!--主量元素-->
                 <ui:CardExpander Grid.Row="1" Margin="0 5">
                     <ui:CardExpander.Icon>
-                        <ui:SymbolIcon Symbol="DatabaseMultiple20"/>
+                        <ui:SymbolIcon Symbol="Branch24"/>
                     </ui:CardExpander.Icon>
                     <ui:CardExpander.Header>
                         <StackPanel>
-                            <TextBlock Text="全岩主量元素" FontWeight="Bold"/>
-                            <TextBlock Text="123" FontSize="12"/>
+                            <TextBlock Text="{Binding [WholeRock_ME],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding [WholeRock_ME_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
                         </StackPanel>
                     </ui:CardExpander.Header>
                     <ui:CardExpander.Content>
@@ -113,12 +114,12 @@
                 <!--微量元素-->
                 <ui:CardExpander Grid.Row="2">
                     <ui:CardExpander.Icon>
-                        <ui:SymbolIcon Symbol="DatabaseMultiple20"/>
+                        <ui:SymbolIcon Symbol="DataWhisker24"/>
                     </ui:CardExpander.Icon>
                     <ui:CardExpander.Header>
                         <StackPanel>
-                            <TextBlock Text="全岩微量元素" FontWeight="Bold"/>
-                            <TextBlock Text="123" FontSize="12"/>
+                            <TextBlock Text="{Binding [WholeRock_TE],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding [WholeRock_TE_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
                         </StackPanel>
                     </ui:CardExpander.Header>
                     <ui:CardExpander.Content>
@@ -202,13 +203,13 @@
                 <Border Background="{DynamicResource ApplicationBackgroundBrush}" CornerRadius="5"
                         BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1"/>
                 <ui:LoadingScreen HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="预测中" VerticalAlignment="Center" HorizontalAlignment="Center"
+                <TextBlock Text="{Binding [Predicting],Source={x:Static lg:LanguageService.Instance}}" VerticalAlignment="Center" HorizontalAlignment="Center"
                            Margin="0 100 0 0"/>
             </Grid>
         </Grid>
 
         <!--关于-->
-        <TextBlock FontSize="20" FontWeight="Bold"  Text="预测结果" Margin="0 5"/>
+        <TextBlock FontSize="20" FontWeight="Bold"  Text="{Binding [Prediction_Res],Source={x:Static lg:LanguageService.Instance}}" Margin="0 5"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.2*"/>
@@ -219,6 +220,7 @@
               BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" CornerRadius="10"
               Height="280">
                 <lvc:CartesianChart Series="{Binding ViewModel.MyNightingaleRoseChartSeries}"
+                                    XAxes="{Binding ViewModel.XOneAxes}"
                                     LegendPosition="Right" LegendTextSize="12"/>
             </Border>
             <Border Grid.Column="2" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" Margin="0 0 0 10"
@@ -226,7 +228,7 @@
               Height="280">
                 <ScrollViewer>
                     <StackPanel Margin="20">
-                        <TextBlock FontSize="20" FontWeight="Bold"  Text="类别映射"/>
+                        <TextBlock FontSize="20" FontWeight="Bold"  Text="{Binding [Category_Mapping],Source={x:Static lg:LanguageService.Instance}}"/>
                         <TextBlock Text="1: Archean Cratons (incl. Greenstone Belts)" TextWrapping="Wrap"
                                    Margin="0 3" FontWeight="Bold"/>
                         <TextBlock Text="2: Complex Volcanic Settings" TextWrapping="Wrap" FontWeight="Bold"/>

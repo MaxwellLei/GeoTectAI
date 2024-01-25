@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helpers="clr-namespace:GeoTectAI.Helpers"
+    xmlns:lg="clr-namespace:GeoTectAI.Services"
     xmlns:local="clr-namespace:GeoTectAI.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
@@ -28,8 +29,8 @@
             </ui:CardControl.Icon>
             <ui:CardControl.Header>
                 <StackPanel>
-                    <TextBlock Text="主题" FontWeight="Bold"/>
-                    <TextBlock Text="选择您的软件主题" FontSize="12"/>
+                    <TextBlock Text="{Binding [Theme],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding [Theme_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
                 </StackPanel>
             </ui:CardControl.Header>
             <ui:CardControl.Content>
@@ -39,8 +40,8 @@
                             <i:InvokeCommandAction Command="{Binding ViewModel.ChangeThemeCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <ComboBoxItem Content="Light" />
-                    <ComboBoxItem Content="Dark"/>
+                    <ComboBoxItem Content="{Binding [Light],Source={x:Static lg:LanguageService.Instance}}" />
+                    <ComboBoxItem Content="{Binding [Dark],Source={x:Static lg:LanguageService.Instance}}"/>
                 </ComboBox>
             </ui:CardControl.Content>
         </ui:CardControl>
@@ -50,8 +51,8 @@
             </ui:CardControl.Icon>
             <ui:CardControl.Header>
                 <StackPanel>
-                    <TextBlock Text="语言" FontWeight="Bold"/>
-                    <TextBlock Text="选择您的软件语言" FontSize="12"/>
+                    <TextBlock Text="{Binding [Languages],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding [Languages_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
                 </StackPanel>
             </ui:CardControl.Header>
             <ui:CardControl.Content>
@@ -62,7 +63,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <ComboBoxItem Content="简体中文"/>
-                    <ComboBoxItem Content="English(US)"/>
+                    <ComboBoxItem Content="English"/>
                 </ComboBox>
             </ui:CardControl.Content>
         </ui:CardControl>
@@ -73,8 +74,8 @@
             </ui:CardControl.Icon>
             <ui:CardControl.Header>
                 <StackPanel>
-                    <TextBlock Text="通知" FontWeight="Bold"/>
-                    <TextBlock Text="选择您的通知方式" FontSize="12"/>
+                    <TextBlock Text="{Binding [Notification],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding [Notification_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
                 </StackPanel>
             </ui:CardControl.Header>
             <ui:CardControl.Content>
@@ -84,19 +85,45 @@
                             <i:InvokeCommandAction Command="{Binding ViewModel.ChangePopUpModeCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <ComboBoxItem Name="SilentNotification" Content="静默通知"/>
-                    <ComboBoxItem Content="弹窗通知"/>
+                    <ComboBoxItem Name="SilentNotification" Content="{Binding [SilentNotification],Source={x:Static lg:LanguageService.Instance}}"/>
+                    <ComboBoxItem Content="{Binding [PopupNotification],Source={x:Static lg:LanguageService.Instance}}"/>
                 </ComboBox>
+            </ui:CardControl.Content>
+        </ui:CardControl>
+        <!--自动关闭-->
+        <ui:CardControl IsEnabled="{Binding ElementName=SilentNotification,Path=IsSelected,Mode=OneWay}" 
+                        Margin="0 8 0 0">
+            <ui:CardControl.Icon>
+                <ui:SymbolIcon Symbol="Timer24"/>
+            </ui:CardControl.Icon>
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock Text="{Binding [Automatic_S_Time],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding [Automatic_S_Time_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ui:CardControl.Content>
+                <WrapPanel>
+                    <TextBlock Text="{Binding ElementName=TimeSlider,Path=Value,Mode=OneWay}" 
+                               Margin="0 0 10 0" VerticalAlignment="Center"/>
+                    <Slider Name="TimeSlider" Value="{Binding ViewModel.CurrentPopTime}" Minimum="3" Maximum="12">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="ValueChanged">
+                                <i:InvokeCommandAction Command="{Binding ViewModel.ChangePopUpTimeCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Slider>
+                </WrapPanel>
             </ui:CardControl.Content>
         </ui:CardControl>
 
         <!--关于-->
         <TextBlock
-            Margin="0,24,0,10"
+            Margin="0,10,0,10"
             FontSize="20"
             FontWeight="Medium"
-            Text="关于" />
-        <ui:CardExpander IsExpanded="True" CornerRadius="8" Margin="0 0 0 20">
+            Text="{Binding [About],Source={x:Static lg:LanguageService.Instance}}" />
+        <ui:CardExpander IsExpanded="True" CornerRadius="8" Margin="0 0 0 10">
             <ui:CardExpander.Icon>
                 <ui:SymbolIcon Symbol="DataUsageToolbox24"/>
             </ui:CardExpander.Icon>
@@ -104,10 +131,10 @@
                 <Grid>
                     <StackPanel>
                         <TextBlock Text="GeoTectAI" FontWeight="Bold"/>
-                        <TextBlock Text="根据您的岩浆岩全岩地球化学元素预测您的大地构造环境" FontSize="12"/>
+                        <TextBlock Text="{Binding [About_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
                     </StackPanel>
                     <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <TextBlock Text="版本："  VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding [Version],Source={x:Static lg:LanguageService.Instance}}"  VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding ViewModel.AppVersion}" Margin=" 0 0 10 0"/>
                     </WrapPanel>
                 </Grid>
@@ -115,7 +142,7 @@
             <ui:CardExpander.Content>
                 <StackPanel>
                     <StackPanel>
-                        <TextBlock Text="项目依赖支持" Margin="0 5"/>
+                        <TextBlock Text="{Binding [Project_Support],Source={x:Static lg:LanguageService.Instance}}" Margin="0 5"/>
                         <WrapPanel>
                             <ui:Hyperlink Content="WPF-UI" NavigateUri="https://wpfui.lepo.co/index.html"/>
                             <ui:Hyperlink Content="CommunityToolkit.Mvvm" NavigateUri="https://www.nuget.org/packages/CommunityToolkit.Mvvm"/>
@@ -126,11 +153,6 @@
                             <ui:Hyperlink Content="LiveChartsCore.SkiaSharpView.WPF" NavigateUri="https://github.com/beto-rodriguez/LiveCharts2"/>
                         </WrapPanel>
                     </StackPanel>
-                    <!--<StackPanel>
-                        <TextBlock Text="123" Margin="0 5"/>
-                        <TextBlock Text="123" 
-                                   Margin="10 5 0 0"/>
-                    </StackPanel>-->
                 </StackPanel>
             </ui:CardExpander.Content>
         </ui:CardExpander>

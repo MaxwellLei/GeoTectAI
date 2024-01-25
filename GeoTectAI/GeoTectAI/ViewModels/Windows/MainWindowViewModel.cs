@@ -14,31 +14,31 @@ namespace GeoTectAI.ViewModels.Windows
     public partial class MainWindowViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string _applicationTitle = "WPF UI - GeoTectAI";
+        private string _applicationTitle = "GeoTectAI";
 
         [ObservableProperty]
         private ObservableCollection<object> _menuItems = new()
         {
             new NavigationViewItem()
             {
-                Content = "Home",
+                Content = LanguageService.Instance["Home"],
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage)
             },
-            new NavigationViewItem("数据预测", SymbolRegular.DataHistogram24, typeof(DataPage))
+            new NavigationViewItem(LanguageService.Instance["DataPredict"], SymbolRegular.DataHistogram24, typeof(DataPage))
             {
                 MenuItems = new object[]
                 {
                     new NavigationViewItem()
                     {
-                        Content = "单项预测",
-                        Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                        Content = LanguageService.Instance["UPrediction"],
+                        Icon = new SymbolIcon { Symbol = SymbolRegular.DataPie24 },
                         TargetPageType = typeof(Views.Pages.OneDataPage)
                     },
                     new NavigationViewItem()
                     {
-                        Content = "批量预测",
-                        Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                        Content = LanguageService.Instance["MPrediction"],
+                        Icon = new SymbolIcon { Symbol = SymbolRegular.DocumentLandscapeData24 },
                         TargetPageType = typeof(Views.Pages.MultipleDataPage)
                     }
 
@@ -52,7 +52,7 @@ namespace GeoTectAI.ViewModels.Windows
         {
             new NavigationViewItem()
             {
-                Content = "Settings",
+                Content = LanguageService.Instance["Settings"],
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
                 TargetPageType = typeof(Views.Pages.SettingsPage)
             }

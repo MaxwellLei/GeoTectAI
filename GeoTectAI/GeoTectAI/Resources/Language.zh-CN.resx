@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
 		Microsoft ResX Schema
 
 		Version 1.3
@@ -58,44 +58,223 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Home" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="DataPredict" xml:space="preserve">
+    <value>数据预测</value>
+  </data>
+  <data name="UPrediction" xml:space="preserve">
+    <value>单项预测</value>
+  </data>
+  <data name="MPrediction" xml:space="preserve">
+    <value>批量预测</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="RF_Title" xml:space="preserve">
+    <value>随机森林</value>
+  </data>
+  <data name="RF_Title_D" xml:space="preserve">
+    <value>一种集成学习方法，通过构建多个决策树进行预测。在训练时随机选择样本和特征，用多数投票或平均方式合并所有树的预测结果。</value>
+  </data>
+  <data name="XGB_Title" xml:space="preserve">
+    <value>XGBoost</value>
+  </data>
+  <data name="ANN_Title" xml:space="preserve">
+    <value>人工神经网络</value>
+  </data>
+  <data name="XGB_Title_D" xml:space="preserve">
+    <value>梯度提升算法的一种高效实现。逐步添加新的弱学习器（通常是决策树），专注于减少预测误差，提高模型精度。</value>
+  </data>
+  <data name="ANN_Title_D" xml:space="preserve">
+    <value>受生物神经网络启发的节点和加权连接组成的网络。包含输入层、隐藏层和输出层，学习复杂的非线性关系。</value>
+  </data>
+  <data name="UPrediction_D" xml:space="preserve">
+    <value>输入数据进行单次预测</value>
+  </data>
+  <data name="MPrediction_D" xml:space="preserve">
+    <value>导入您的文件进行批量预测</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>机器学习模型</value>
+  </data>
+  <data name="Model_D" xml:space="preserve">
+    <value>选择适当的预测模型</value>
+  </data>
+  <data name="WholeRock_ME" xml:space="preserve">
+    <value>全岩主量元素</value>
+  </data>
+  <data name="WholeRock_ME_D" xml:space="preserve">
+    <value>构成岩石的主要化学元素</value>
+  </data>
+  <data name="WholeRock_TE" xml:space="preserve">
+    <value>全岩微量元素</value>
+  </data>
+  <data name="WholeRock_TE_D" xml:space="preserve">
+    <value>构成岩石的微量化学元素</value>
+  </data>
+  <data name="Prediction_Res" xml:space="preserve">
+    <value>预测结果</value>
+  </data>
+  <data name="Category_Mapping" xml:space="preserve">
+    <value>类别映射</value>
+  </data>
+  <data name="Integration" xml:space="preserve">
+    <value>综合</value>
+  </data>
+  <data name="Predict" xml:space="preserve">
+    <value>预测</value>
+  </data>
+  <data name="Import_File" xml:space="preserve">
+    <value>导入文件</value>
+  </data>
+  <data name="Delete_Data" xml:space="preserve">
+    <value>清除数据</value>
+  </data>
+  <data name="M_Predict" xml:space="preserve">
+    <value>批量预测</value>
+  </data>
+  <data name="Attribute_Config" xml:space="preserve">
+    <value>属性配置</value>
+  </data>
+  <data name="Data_Statistics" xml:space="preserve">
+    <value>数据统计</value>
+  </data>
+  <data name="Export_As_Excel" xml:space="preserve">
+    <value>导出为 Excel</value>
+  </data>
+  <data name="Open_File_Location" xml:space="preserve">
+    <value>打开文件位置</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="Theme_D" xml:space="preserve">
+    <value>选择适合的软件主题</value>
+  </data>
+  <data name="Languages" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Languages_D" xml:space="preserve">
+    <value>选择您的软件语言 (部分翻译需要重启软件生效)</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>通知</value>
+  </data>
+  <data name="Notification_D" xml:space="preserve">
+    <value>选择消息的通知方式</value>
+  </data>
+  <data name="Automatic_S_Time" xml:space="preserve">
+    <value>自动关闭</value>
+  </data>
+  <data name="Automatic_S_Time_D" xml:space="preserve">
+    <value>消息关闭时间（仅静默通知有效）</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="SilentNotification" xml:space="preserve">
+    <value>静默通知</value>
+  </data>
+  <data name="PopupNotification" xml:space="preserve">
+    <value>弹窗通知</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="About_D" xml:space="preserve">
+    <value>根据您的岩浆岩全岩地球化学元素预测大地构造环境</value>
+  </data>
+  <data name="Project_Support" xml:space="preserve">
+    <value>项目依赖支持</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>版本：</value>
+  </data>
+  <data name="Predicting" xml:space="preserve">
+    <value>预测中....</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Error_1" xml:space="preserve">
+    <value>存在输入数据非法，已转换为 0</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="Success_1" xml:space="preserve">
+    <value>读取文件成功</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>消息</value>
+  </data>
+  <data name="Info_1" xml:space="preserve">
+    <value>取消文件导入</value>
+  </data>
+  <data name="Success_2" xml:space="preserve">
+    <value>清除完成</value>
+  </data>
+  <data name="Success_3" xml:space="preserve">
+    <value>预测完成</value>
+  </data>
+  <data name="Error_2" xml:space="preserve">
+    <value>请导入数据</value>
+  </data>
+  <data name="Success_4" xml:space="preserve">
+    <value>文件导出成功</value>
+  </data>
+  <data name="Error_3" xml:space="preserve">
+    <value>请先进行预测</value>
+  </data>
+  <data name="Success_5" xml:space="preserve">
+    <value>已打开文件所在位置</value>
+  </data>
+  <data name="Error_4" xml:space="preserve">
+    <value>超出索引</value>
+  </data>
 </root>

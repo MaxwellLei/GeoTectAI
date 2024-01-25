@@ -4,8 +4,10 @@ using GeoTectAI.Services;
 using HarfBuzzSharp;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
 using Microsoft.VisualBasic;
 using OfficeOpenXml;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,6 +28,7 @@ namespace GeoTectAI.ViewModels.Pages
     {
         private bool _isInitialized = false;
         private string tempFile = string.Empty;
+        private bool isPre = false;
 
         [ObservableProperty]
         private DataTable _data;    //读取的excel数据
@@ -41,6 +44,12 @@ namespace GeoTectAI.ViewModels.Pages
 
         [ObservableProperty]
         private Visibility isLoadVisible = Visibility.Hidden;
+
+        [ObservableProperty]
+        private ObservableCollection<Axis> _xAxes;
+
+        [ObservableProperty]
+        private ObservableCollection<Axis> _yAxes;
 
         [ObservableProperty]
         private int _siO2Index;
@@ -139,6 +148,22 @@ namespace GeoTectAI.ViewModels.Pages
         {
 
             MyNightingaleRoseChartSeries = basicBarsSeries;
+
+            XAxes = new ObservableCollection<Axis>
+            {
+                new Axis
+                {
+                    LabelsPaint = new SolidColorPaint(SKColors.DeepSkyBlue)
+                }
+            };
+
+            YAxes = new ObservableCollection<Axis>
+            {
+                new Axis
+                {
+                    LabelsPaint = new SolidColorPaint(SKColors.DeepSkyBlue)
+                }
+            };
         }
 
         //读取数据
@@ -164,9 +189,17 @@ namespace GeoTectAI.ViewModels.Pages
                     if (index >= 0 && index < Data.Columns.Count)
                     {
                         if (float.TryParse(row[index].ToString(), out float value))
+                        {
                             rowData.Add(value);
+                        }
                         else
-                            rowData.Add(0f); // 或处理不可转换的情况
+                        {
+                            rowData.Add(0f);
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                MessageService.AutoShowDialog(LanguageService.Instance["Error"], LanguageService.Instance["Error_1"], ControlAppearance.Danger);
+                            });
+                        }
                     }
                 }
                 extractedData.Add(rowData.ToArray());
@@ -344,16 +377,17 @@ namespace GeoTectAI.ViewModels.Pages
                     Data = ReadExcelFile(temp[0]);  //读取数据
                     LoadColumnNames();      //加载列名称
                     autoCheck();    //自动匹配
+                    isPre = false;
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        MessageService.AutoShowDialog("成功", "读取文件成功", ControlAppearance.Success);
+                        MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_1"], ControlAppearance.Success);
                     });
                 }
                 else
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        MessageService.AutoShowDialog("消息", "取消文件导入", ControlAppearance.Info);
+                        MessageService.AutoShowDialog(LanguageService.Instance["Info"], LanguageService.Instance["Info_1"], ControlAppearance.Info);
                     });
                 }
             });
@@ -367,8 +401,11 @@ namespace GeoTectAI.ViewModels.Pages
         {
             Data = null;
             ColumnNames = null;
-            MessageService.AutoShowDialog("成功", "清除完成", ControlAppearance.Success);
+            isPre = false;
+            MyNightingaleRoseChartSeries = null;
+            MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_2"], ControlAppearance.Success);
         }
+
         //批量预测
         [RelayCommand]
         private async void OnMultiplePredict()
@@ -411,25 +448,59 @@ namespace GeoTectAI.ViewModels.Pages
             DataTable temptable = Data.Copy();
             AddColumnToDataTable(temptable, "pre_name", predictRes);
             Data = temptable;
-
+            PaintNightingaleRoseChart(tempSeries);
             IsLoadVisible = Visibility.Hidden;
-            MessageService.AutoShowDialog("成功", "预测完成", ControlAppearance.Success);
+            MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_3"], ControlAppearance.Success);
         }
 
         //导出Excel
         [RelayCommand]
         private void OnExportAsExcel()
         {
-            string appPath = System.IO.Directory.GetCurrentDirectory() + "\\Data_OutPut";
-            FileHelper.CreateFolder(appPath);
-            ExportDataTableToExcel(Data, appPath + "\\" + GetFileNameByTime() + ".xlsx");
+            if(Data == null)
+            {
+                MessageService.AutoShowDialog(LanguageService.Instance["Error"], LanguageService.Instance["Error_2"], ControlAppearance.Danger);
+            }
+            else
+            {
+                if (isPre)
+                {
+                    Task task = new Task(() =>
+                    {
+                        string appPath = System.IO.Directory.GetCurrentDirectory() + "\\Data_OutPut";
+                        FileHelper.CreateFolder(appPath);
+                        tempFile = appPath + "\\" + GetFileNameByTime() + ".xlsx";
+                        ExportDataTableToExcel(Data, tempFile);
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_4"], ControlAppearance.Success);
+                        });
+                    });
+                    task.Start();
+                }
+                else
+                {
+                    MessageService.AutoShowDialog(LanguageService.Instance["Error"], LanguageService.Instance["Error_3"], ControlAppearance.Danger);
+                }
+
+            }
         }
 
         //打开文件位置
         [RelayCommand]
         private void OnOpenFileLocation()
         {
-
+            string appPath = System.IO.Directory.GetCurrentDirectory() + "\\Data_OutPut";
+            FileHelper.CreateFolder(appPath);
+            if (tempFile == string.Empty)
+            {
+                FileHelper.OpenFolder(System.IO.Directory.GetCurrentDirectory() + "\\Data_OutPut");
+            }
+            else
+            {
+                FileHelper.OpenFolder(tempFile);
+            }
+            MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_5"], ControlAppearance.Success);
         }
     }
 }

@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:lg="clr-namespace:GeoTectAI.Services"
       xmlns:local="clr-namespace:GeoTectAI.Views.Pages"
       mc:Ignorable="d" 
       d:DataContext="{d:DesignInstance local:MultipleDataPage,
@@ -19,26 +20,26 @@
         <StackPanel>
             <ui:CardControl>
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="DarkTheme24"/>
+                    <ui:SymbolIcon Symbol="BrainCircuit24"/>
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
-                        <TextBlock Text="模型" FontWeight="Bold"/>
-                        <TextBlock Text="选择您的预测模型" FontSize="12"/>
+                        <TextBlock Text="{Binding [Model],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding [Model_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
                     </StackPanel>
                 </ui:CardControl.Header>
                 <ui:CardControl.Content>
                     <DockPanel>
-                        <Button Content="导入文件" Command="{Binding ViewModel.ImportFileCommand}"
+                        <Button Content="{Binding [Import_File],Source={x:Static lg:LanguageService.Instance}}" Command="{Binding ViewModel.ImportFileCommand}"
                             VerticalAlignment="Stretch"/>
-                        <Button Content="清除数据" Command="{Binding ViewModel.DeleteDataCommand}" 
-                            VerticalAlignment="Stretch" Margin="5 0 0 0"/>
+                        <ui:Button Content="{Binding [Delete_Data],Source={x:Static lg:LanguageService.Instance}}" Command="{Binding ViewModel.DeleteDataCommand}" 
+                            VerticalAlignment="Stretch" Margin="5 0 0 0" Foreground="Red" FontWeight="Bold"/>
                         <ComboBox SelectedIndex="{Binding ViewModel.ModelIndex}" Margin="5 0">
-                            <ComboBoxItem Content="随机森林"/>
-                            <ComboBoxItem Content="XGBooting"/>
-                            <ComboBoxItem Content="人工神经网络"/>
+                            <ComboBoxItem Content="{Binding [RF_Title],Source={x:Static lg:LanguageService.Instance}}"/>
+                            <ComboBoxItem Content="{Binding [XGB_Title],Source={x:Static lg:LanguageService.Instance}}"/>
+                            <ComboBoxItem Content="{Binding [ANN_Title],Source={x:Static lg:LanguageService.Instance}}"/>
                         </ComboBox>
-                        <Button Content="批量预测" VerticalAlignment="Stretch"
+                        <Button Content="{Binding [M_Predict],Source={x:Static lg:LanguageService.Instance}}" VerticalAlignment="Stretch"
                             Command="{Binding ViewModel.MultiplePredictCommand}"/>
                     </DockPanel>
                 </ui:CardControl.Content>
@@ -48,16 +49,16 @@
                   HorizontalScrollBarVisibility="Auto" MaxHeight="360" Margin="0 5" MinHeight="120">
             </ui:DataGrid>
 
-            <TextBlock FontSize="20" FontWeight="Bold"  Text="属性配置" Margin="0 5"/>
+            <TextBlock FontSize="20" FontWeight="Bold"  Text="{Binding [Attribute_Config],Source={x:Static lg:LanguageService.Instance}}" Margin="0 5"/>
 
             <ui:CardExpander Grid.Row="1" Margin="0 5">
                 <ui:CardExpander.Icon>
-                    <ui:SymbolIcon Symbol="DatabaseMultiple20"/>
+                    <ui:SymbolIcon Symbol="Branch24"/>
                 </ui:CardExpander.Icon>
                 <ui:CardExpander.Header>
                     <StackPanel>
-                        <TextBlock Text="全岩主量元素" FontWeight="Bold"/>
-                        <TextBlock Text="123" FontSize="12"/>
+                        <TextBlock Text="{Binding [WholeRock_ME],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding [WholeRock_ME_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
                     </StackPanel>
                 </ui:CardExpander.Header>
                 <ui:CardExpander.Content>
@@ -128,12 +129,12 @@
             <!--微量元素-->
             <ui:CardExpander Grid.Row="2">
                 <ui:CardExpander.Icon>
-                    <ui:SymbolIcon Symbol="DatabaseMultiple20"/>
+                    <ui:SymbolIcon Symbol="DataWhisker24"/>
                 </ui:CardExpander.Icon>
                 <ui:CardExpander.Header>
                     <StackPanel>
-                        <TextBlock Text="全岩微量元素" FontWeight="Bold"/>
-                        <TextBlock Text="123" FontSize="12"/>
+                        <TextBlock Text="{Binding [WholeRock_TE],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding [WholeRock_TE_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
                     </StackPanel>
                 </ui:CardExpander.Header>
                 <ui:CardExpander.Content>
@@ -226,7 +227,7 @@
                 </ui:CardExpander.Content>
             </ui:CardExpander>
 
-            <TextBlock FontSize="20" FontWeight="Bold"  Text="数据统计" Margin="0 5"/>
+            <TextBlock FontSize="20" FontWeight="Bold"  Text="{Binding [Data_Statistics],Source={x:Static lg:LanguageService.Instance}}" Margin="0 5"/>
 
             <Grid Margin="0 0 0 10">
                 <Grid.ColumnDefinitions>
@@ -237,7 +238,8 @@
                 <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" 
               BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" CornerRadius="10"
               Height="280">
-                    <lvc:CartesianChart Series="{Binding ViewModel}"></lvc:CartesianChart>
+                    <lvc:CartesianChart Series="{Binding ViewModel.MyNightingaleRoseChartSeries}"
+                                        XAxes="{Binding ViewModel.XAxes}" YAxes="{Binding ViewModel.YAxes}"/>
                 </Border>
                 <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" Grid.Column="2"
               BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" CornerRadius="10"
@@ -245,12 +247,13 @@
                     <ScrollViewer>
                         <StackPanel Margin="10">
                             <DockPanel>
-                                <Button Content="导出为 Excel" HorizontalAlignment="Stretch"
+                                <Button Content="{Binding [Export_As_Excel],Source={x:Static lg:LanguageService.Instance}}" HorizontalAlignment="Stretch"
                                         Command="{Binding ViewModel.ExportAsExcelCommand}"/>
-                                <Button Content="打开文件所在位置" HorizontalAlignment="Stretch" Margin="10 0 0 0"/>
+                                <Button Content="{Binding [Open_File_Location],Source={x:Static lg:LanguageService.Instance}}" HorizontalAlignment="Stretch" Margin="10 0 0 0"
+                                        Command="{Binding ViewModel.OpenFileLocationCommand}"/>
                             </DockPanel>
                             <StackPanel Margin="10">
-                                <TextBlock FontSize="20" FontWeight="Bold"  Text="类别映射"/>
+                                <TextBlock FontSize="20" FontWeight="Bold"  Text="{Binding [Category_Mapping],Source={x:Static lg:LanguageService.Instance}}"/>
                                 <TextBlock Text="1: Archean Cratons (incl. Greenstone Belts)" TextWrapping="Wrap"
                                    Margin="0 3" FontWeight="Bold"/>
                                 <TextBlock Text="2: Complex Volcanic Settings" TextWrapping="Wrap" FontWeight="Bold"/>
@@ -274,7 +277,7 @@
             <Border Background="{DynamicResource ApplicationBackgroundBrush}" CornerRadius="5"
                         BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1"/>
             <ui:LoadingScreen HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="预测中" VerticalAlignment="Center" HorizontalAlignment="Center"
+            <TextBlock Text="{Binding [Predicting],Source={x:Static lg:LanguageService.Instance}}" VerticalAlignment="Center" HorizontalAlignment="Center"
                            Margin="0 100 0 0"/>
         </Grid>
     </Grid>

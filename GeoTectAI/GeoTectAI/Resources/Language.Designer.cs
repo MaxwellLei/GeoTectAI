@@ -59,5 +59,545 @@ namespace GeoTectAI.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似 About 的本地化字符串。
+        /// </summary>
+        internal static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Predict Tectonic Setting Based on Your Mafic Rock Whole-Rock Geochemical Elements 的本地化字符串。
+        /// </summary>
+        internal static string About_D {
+            get {
+                return ResourceManager.GetString("About_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ANN 的本地化字符串。
+        /// </summary>
+        internal static string ANN_Title {
+            get {
+                return ResourceManager.GetString("ANN_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Networks composed of nodes and weighted connections, inspired by biological neural networks. Includes input, hidden, and output layers, learning complex nonlinear relationships. 的本地化字符串。
+        /// </summary>
+        internal static string ANN_Title_D {
+            get {
+                return ResourceManager.GetString("ANN_Title_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Attribute Configuration 的本地化字符串。
+        /// </summary>
+        internal static string Attribute_Config {
+            get {
+                return ResourceManager.GetString("Attribute_Config", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Automatic Shutdown 的本地化字符串。
+        /// </summary>
+        internal static string Automatic_S_Time {
+            get {
+                return ResourceManager.GetString("Automatic_S_Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Shutdown Time for Messages Under Silent Notification 的本地化字符串。
+        /// </summary>
+        internal static string Automatic_S_Time_D {
+            get {
+                return ResourceManager.GetString("Automatic_S_Time_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Category Mapping 的本地化字符串。
+        /// </summary>
+        internal static string Category_Mapping {
+            get {
+                return ResourceManager.GetString("Category_Mapping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Dark 的本地化字符串。
+        /// </summary>
+        internal static string Dark {
+            get {
+                return ResourceManager.GetString("Dark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Data Statistics 的本地化字符串。
+        /// </summary>
+        internal static string Data_Statistics {
+            get {
+                return ResourceManager.GetString("Data_Statistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Data Predict 的本地化字符串。
+        /// </summary>
+        internal static string DataPredict {
+            get {
+                return ResourceManager.GetString("DataPredict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Clear Data 的本地化字符串。
+        /// </summary>
+        internal static string Delete_Data {
+            get {
+                return ResourceManager.GetString("Delete_Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Error 的本地化字符串。
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Invalid Input Data Detected, Converted to 0 的本地化字符串。
+        /// </summary>
+        internal static string Error_1 {
+            get {
+                return ResourceManager.GetString("Error_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Please Import Data 的本地化字符串。
+        /// </summary>
+        internal static string Error_2 {
+            get {
+                return ResourceManager.GetString("Error_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Please Perform Prediction First 的本地化字符串。
+        /// </summary>
+        internal static string Error_3 {
+            get {
+                return ResourceManager.GetString("Error_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Index Out of Bounds 的本地化字符串。
+        /// </summary>
+        internal static string Error_4 {
+            get {
+                return ResourceManager.GetString("Error_4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Export as Excel 的本地化字符串。
+        /// </summary>
+        internal static string Export_As_Excel {
+            get {
+                return ResourceManager.GetString("Export_As_Excel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Home 的本地化字符串。
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Import File 的本地化字符串。
+        /// </summary>
+        internal static string Import_File {
+            get {
+                return ResourceManager.GetString("Import_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Info 的本地化字符串。
+        /// </summary>
+        internal static string Info {
+            get {
+                return ResourceManager.GetString("Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Cancel File Import 的本地化字符串。
+        /// </summary>
+        internal static string Info_1 {
+            get {
+                return ResourceManager.GetString("Info_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Integration 的本地化字符串。
+        /// </summary>
+        internal static string Integration {
+            get {
+                return ResourceManager.GetString("Integration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Language 的本地化字符串。
+        /// </summary>
+        internal static string Languages {
+            get {
+                return ResourceManager.GetString("Languages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Select Your Software Language (Some Translations Require Restarting the Software to Take Effect) 的本地化字符串。
+        /// </summary>
+        internal static string Languages_D {
+            get {
+                return ResourceManager.GetString("Languages_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Light 的本地化字符串。
+        /// </summary>
+        internal static string Light {
+            get {
+                return ResourceManager.GetString("Light", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Batch Predict 的本地化字符串。
+        /// </summary>
+        internal static string M_Predict {
+            get {
+                return ResourceManager.GetString("M_Predict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Machine Learning Model 的本地化字符串。
+        /// </summary>
+        internal static string Model {
+            get {
+                return ResourceManager.GetString("Model", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Select an Appropriate Prediction Model 的本地化字符串。
+        /// </summary>
+        internal static string Model_D {
+            get {
+                return ResourceManager.GetString("Model_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Batch Predict 的本地化字符串。
+        /// </summary>
+        internal static string MPrediction {
+            get {
+                return ResourceManager.GetString("MPrediction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Import Your File for Batch Prediction 的本地化字符串。
+        /// </summary>
+        internal static string MPrediction_D {
+            get {
+                return ResourceManager.GetString("MPrediction_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Notification 的本地化字符串。
+        /// </summary>
+        internal static string Notification {
+            get {
+                return ResourceManager.GetString("Notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Select Your Notification Method 的本地化字符串。
+        /// </summary>
+        internal static string Notification_D {
+            get {
+                return ResourceManager.GetString("Notification_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Open File Location 的本地化字符串。
+        /// </summary>
+        internal static string Open_File_Location {
+            get {
+                return ResourceManager.GetString("Open_File_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Popup Notification 的本地化字符串。
+        /// </summary>
+        internal static string PopupNotification {
+            get {
+                return ResourceManager.GetString("PopupNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Predict 的本地化字符串。
+        /// </summary>
+        internal static string Predict {
+            get {
+                return ResourceManager.GetString("Predict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Predicting... 的本地化字符串。
+        /// </summary>
+        internal static string Predicting {
+            get {
+                return ResourceManager.GetString("Predicting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Prediction Results 的本地化字符串。
+        /// </summary>
+        internal static string Prediction_Res {
+            get {
+                return ResourceManager.GetString("Prediction_Res", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Project Dependency Support 的本地化字符串。
+        /// </summary>
+        internal static string Project_Support {
+            get {
+                return ResourceManager.GetString("Project_Support", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Random Forest 的本地化字符串。
+        /// </summary>
+        internal static string RF_Title {
+            get {
+                return ResourceManager.GetString("RF_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 An ensemble learning method using multiple decision trees for prediction. It randomly selects samples and features for training and combines predictions of all trees through voting or averaging. 的本地化字符串。
+        /// </summary>
+        internal static string RF_Title_D {
+            get {
+                return ResourceManager.GetString("RF_Title_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Settings 的本地化字符串。
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Silent Notification 的本地化字符串。
+        /// </summary>
+        internal static string SilentNotification {
+            get {
+                return ResourceManager.GetString("SilentNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Success 的本地化字符串。
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 File Read Successfully 的本地化字符串。
+        /// </summary>
+        internal static string Success_1 {
+            get {
+                return ResourceManager.GetString("Success_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Clearing Completed 的本地化字符串。
+        /// </summary>
+        internal static string Success_2 {
+            get {
+                return ResourceManager.GetString("Success_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Prediction Completed 的本地化字符串。
+        /// </summary>
+        internal static string Success_3 {
+            get {
+                return ResourceManager.GetString("Success_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 File Exported Successfully 的本地化字符串。
+        /// </summary>
+        internal static string Success_4 {
+            get {
+                return ResourceManager.GetString("Success_4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 File Location Opened 的本地化字符串。
+        /// </summary>
+        internal static string Success_5 {
+            get {
+                return ResourceManager.GetString("Success_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Theme 的本地化字符串。
+        /// </summary>
+        internal static string Theme {
+            get {
+                return ResourceManager.GetString("Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Select Your Software Theme 的本地化字符串。
+        /// </summary>
+        internal static string Theme_D {
+            get {
+                return ResourceManager.GetString("Theme_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Univaricate Predict 的本地化字符串。
+        /// </summary>
+        internal static string UPrediction {
+            get {
+                return ResourceManager.GetString("UPrediction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Input Your Data for Single Prediction. 的本地化字符串。
+        /// </summary>
+        internal static string UPrediction_D {
+            get {
+                return ResourceManager.GetString("UPrediction_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Version： 的本地化字符串。
+        /// </summary>
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Whole-Rock Major Elements 的本地化字符串。
+        /// </summary>
+        internal static string WholeRock_ME {
+            get {
+                return ResourceManager.GetString("WholeRock_ME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Major Chemical Elements Constituting Rocks 的本地化字符串。
+        /// </summary>
+        internal static string WholeRock_ME_D {
+            get {
+                return ResourceManager.GetString("WholeRock_ME_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Whole-Rock Trace Elements 的本地化字符串。
+        /// </summary>
+        internal static string WholeRock_TE {
+            get {
+                return ResourceManager.GetString("WholeRock_TE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Trace Chemical Elements Constituting Rocks 的本地化字符串。
+        /// </summary>
+        internal static string WholeRock_TE_D {
+            get {
+                return ResourceManager.GetString("WholeRock_TE_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 XGBoost 的本地化字符串。
+        /// </summary>
+        internal static string XGB_Title {
+            get {
+                return ResourceManager.GetString("XGB_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 An efficient implementation of gradient boosting. Adds new weak learners (usually decision trees) incrementally, focusing on reducing prediction errors and improving model accuracy. 的本地化字符串。
+        /// </summary>
+        internal static string XGB_Title_D {
+            get {
+                return ResourceManager.GetString("XGB_Title_D", resourceCulture);
+            }
+        }
     }
 }

@@ -26,6 +26,10 @@ namespace GeoTectAI.ViewModels.Pages
         [ObservableProperty]
         private int? _currentPopUp;
 
+        //静默通知时间
+        [ObservableProperty]
+        private int? _currentPopTime;
+
         [ObservableProperty]
         private string _appVersion = String.Empty;
 
@@ -51,6 +55,7 @@ namespace GeoTectAI.ViewModels.Pages
             CurrentTheme = Convert.ToInt32(ConfigHelper.ReadConfig("Theme"));
             CurrentLanguage = Convert.ToInt32(ConfigHelper.ReadConfig("Language"));
             CurrentPopUp = Convert.ToInt32(ConfigHelper.ReadConfig("NotificationMode"));
+            CurrentPopTime = Convert.ToInt32(ConfigHelper.ReadConfig("NotificationTime"));
         }
 
 
@@ -109,6 +114,17 @@ namespace GeoTectAI.ViewModels.Pages
             {
                 //写入配置文件
                 ConfigHelper.WriteConfig("NotificationMode", CurrentPopUp.ToString());
+            }
+        }
+
+        //静默通知自动关闭时间
+        [RelayCommand]
+        private void OnChangePopUpTime()
+        {
+            if (CurrentPopTime != null)
+            {
+                //写入配置文件
+                ConfigHelper.WriteConfig("NotificationTime", CurrentPopTime.ToString());
             }
         }
     }

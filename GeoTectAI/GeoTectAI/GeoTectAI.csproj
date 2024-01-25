@@ -11,6 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Assets\DataDistributions.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\LOGO_Icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -37,6 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\DataDistributions.png" />
     <None Remove="Assets\LOGO_Icon.png" />
     <None Remove="Executables\predict.exe" />
     <None Remove="Resources\ML_Model\ANN_model.onnx" />

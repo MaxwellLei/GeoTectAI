@@ -110,6 +110,9 @@ namespace GeoTectAI.ViewModels.Pages
         private ObservableCollection<Axis> _yAxes;
 
         [ObservableProperty]
+        private ObservableCollection<Axis> _xOneAxes;
+
+        [ObservableProperty]
         private SolidColorPaint _legendTextPaint = new SolidColorPaint(SKColors.DeepSkyBlue);
 
         private bool _isInitialized = false;
@@ -161,6 +164,14 @@ namespace GeoTectAI.ViewModels.Pages
         {
 
             MyNightingaleRoseChartSeries = basicBarsSeries;
+
+            XOneAxes = new ObservableCollection<Axis>
+            {
+                new Axis
+                {
+                    LabelsPaint = new SolidColorPaint(SKColors.DeepSkyBlue)
+                }
+            };
         }
 
         private void AddToSeries(ObservableCollection<ISeries> seriesCollection, float[] probabilities, string modelName)
@@ -227,7 +238,7 @@ namespace GeoTectAI.ViewModels.Pages
             }
             else
             {
-                Console.WriteLine("警告：超出索引");
+                MessageService.AutoShowDialog(LanguageService.Instance["Error"], LanguageService.Instance["Error_4"], ControlAppearance.Danger);
             }
 
             // 绘制图表
@@ -235,7 +246,7 @@ namespace GeoTectAI.ViewModels.Pages
             PaintNightingaleRoseChart(preClassSeries);
 
             IsLoadVisible = Visibility.Hidden;
-            MessageService.AutoShowDialog("成功", "预测完成", ControlAppearance.Success);
+            MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_3"], ControlAppearance.Success);
         }
     }
 }

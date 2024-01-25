@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:GeoTectAI.Views.Pages"
+    xmlns:lg="clr-namespace:GeoTectAI.Services"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:GeoTectAI.Models"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
@@ -18,7 +19,46 @@
     ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <TextBlock FontSize="20" FontWeight="Bold"  Text="{Binding [RF_Title],Source={x:Static lg:LanguageService.Instance}}" Margin="0 5"/>
+        <TextBlock Text="{Binding [RF_Title_D],Source={x:Static lg:LanguageService.Instance}}"
+                   TextWrapping="Wrap"/>
+        <TextBlock FontSize="20" FontWeight="Bold"  Text="{Binding [XGB_Title],Source={x:Static lg:LanguageService.Instance}}" Margin="0 5"/>
+        <TextBlock Text="{Binding [XGB_Title_D],Source={x:Static lg:LanguageService.Instance}}"
+                   TextWrapping="Wrap"/>
+        <TextBlock FontSize="20" FontWeight="Bold"  Text="{Binding [ANN_Title],Source={x:Static lg:LanguageService.Instance}}" Margin="0 5"/>
+        <TextBlock Text="{Binding [ANN_Title_D],Source={x:Static lg:LanguageService.Instance}}"
+                   TextWrapping="Wrap"/>
+        <Grid Margin="0 20 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.01*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ui:CardControl Grid.Column="0" Grid.Row="0" Command="{Binding ViewModel.CardClickCommand}"
+                            CommandParameter="OneData">
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="DataPie24"/>
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{Binding [UPrediction],Source={x:Static lg:LanguageService.Instance}}"/>
+                        <TextBlock Text="{Binding [UPrediction_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
+                    </StackPanel>
+                </ui:CardControl.Header>
+            </ui:CardControl>
+            <ui:CardControl Grid.Column="2" Grid.Row="0" Command="{Binding ViewModel.CardClickCommand}"
+                            CommandParameter="MultipleData">
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="DocumentLandscapeData24"/>
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{Binding [MPrediction],Source={x:Static lg:LanguageService.Instance}}"/>
+                        <TextBlock Text="{Binding [MPrediction_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
+                    </StackPanel>
+                </ui:CardControl.Header>
+            </ui:CardControl>
+        </Grid>
+    </StackPanel>
 </Page>
