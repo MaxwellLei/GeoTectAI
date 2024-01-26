@@ -277,4 +277,10 @@
   <data name="Error_4" xml:space="preserve">
     <value>超出索引</value>
   </data>
+  <data name="Importing" xml:space="preserve">
+    <value>文件读取中...</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>文件导出中...</value>
+  </data>
 </root>

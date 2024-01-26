@@ -7,6 +7,7 @@
     <ApplicationIcon>LOGO_Icon.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<Version>1.0.2.5</Version>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 

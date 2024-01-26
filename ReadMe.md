@@ -1,7 +1,15 @@
 [⭐简体中文](https://github.com/MaxwellLei/GeoTectAI/tree/main/ReadMe_ZH_CN)
+
 # 📌Project description
 
 This project is based on MVVM architecture, using WPF development techniques, and relies on the `.NET7` framework, which you can download and install via Releases next to the project **Predicting the geotectonic environment of magmatic rocks based on their whole-rock geochemical elements**.
+
+You can find the software installation package in Releases, regarding the naming instructions:
+
+* **DependencyFramework_FullPlatform** means it can **run on Windows, Linux, MacOS**, but **depends on the `.NET7` framework**, which means that if you want to run this program, you need to download and install the `.NET7` framework first before you can run it.
+* NET7 framework**, which means that if you want to run this program, you need to download and install the `.NET7` framework first.
+
+If you have any bugs, please leave a message in the **Issues** of the project.
 
 > Project protocol: [Apache-2.0 license](https://github.com/MaxwellLei/GeoTectAI/tree/v1.0.0.0#)
 

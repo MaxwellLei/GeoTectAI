@@ -3,7 +3,10 @@ using GeoTectAI.Models;
 using GeoTectAI.Services;
 using HarfBuzzSharp;
 using LiveChartsCore;
+using LiveChartsCore.Defaults;
+using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Extensions;
 using LiveChartsCore.SkiaSharpView.Painting;
 using Microsoft.VisualBasic;
 using OfficeOpenXml;
@@ -12,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Diagnostics;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
@@ -40,16 +44,16 @@ namespace GeoTectAI.ViewModels.Pages
         private int _modelIndex;        //选择的模型
 
         [ObservableProperty]
+        private string _progress;
+
+        [ObservableProperty]
         private ObservableCollection<ISeries> _myNightingaleRoseChartSeries;
 
         [ObservableProperty]
         private Visibility isLoadVisible = Visibility.Hidden;
 
         [ObservableProperty]
-        private ObservableCollection<Axis> _xAxes;
-
-        [ObservableProperty]
-        private ObservableCollection<Axis> _yAxes;
+        private ObservableCollection<Axis> _title;
 
         [ObservableProperty]
         private int _siO2Index;
@@ -120,6 +124,8 @@ namespace GeoTectAI.ViewModels.Pages
         [ObservableProperty]
         private int _luIndex;
 
+        [ObservableProperty]
+        private SolidColorPaint _legendTextPaint = new SolidColorPaint(SKColors.DeepSkyBlue);
 
         public void OnNavigatedTo()
         {
@@ -137,6 +143,20 @@ namespace GeoTectAI.ViewModels.Pages
             _isInitialized = true;
         }
 
+        //遮罩
+        private void Mask(bool temp,string texts)
+        {
+            if (temp)
+            {
+                IsLoadVisible = Visibility.Visible;
+            }
+            else
+            {
+                IsLoadVisible = Visibility.Hidden;
+            }
+            Progress = texts;
+        }
+
         //返回选择列对应的索引
         private int GetColumnIndex(string columnName)
         {
@@ -144,26 +164,29 @@ namespace GeoTectAI.ViewModels.Pages
         }
 
         //夜莺玫瑰绘图
-        private void PaintNightingaleRoseChart(ObservableCollection<ISeries> basicBarsSeries)
+        private void PaintNightingaleRoseChart(ObservableCollection<int> basicBarsSeries)
         {
+            var categoryCounts = basicBarsSeries.GroupBy(x => x).ToDictionary(g => g.Key, g => g.Count());
 
-            MyNightingaleRoseChartSeries = basicBarsSeries;
-
-            XAxes = new ObservableCollection<Axis>
+            var newSeries = new ObservableCollection<ISeries>();
+            foreach (var kvp in categoryCounts)
             {
-                new Axis
-                {
-                    LabelsPaint = new SolidColorPaint(SKColors.DeepSkyBlue)
-                }
-            };
+                var tempData = new PieSeries<int> { Values = new[] { kvp.Value },Name = CategoryMapper.GetCategoryName(kvp.Key - 1) };
+                newSeries.Add(tempData);
+            }
 
-            YAxes = new ObservableCollection<Axis>
-            {
-                new Axis
-                {
-                    LabelsPaint = new SolidColorPaint(SKColors.DeepSkyBlue)
-                }
-            };
+            MyNightingaleRoseChartSeries = newSeries;
+        }
+
+        private void SetStyle(string name, PieSeries<ObservableValue> series)
+        {
+            series.Name = name;
+            series.DataLabelsPosition = PolarLabelsPosition.Start;
+            series.DataLabelsFormatter =
+                    point => $"{point.Coordinate.PrimaryValue} {point.Context.Series.Name}";
+            series.InnerRadius = 20;
+            series.RelativeOuterRadius = 8;
+            series.RelativeInnerRadius = 8;
         }
 
         //读取数据
@@ -183,6 +206,7 @@ namespace GeoTectAI.ViewModels.Pages
             // 遍历每一行
             foreach (DataRow row in Data.Rows)
             {
+                if (IsRowEmpty(row)) continue; // 跳过空行
                 var rowData = new List<float>();
                 foreach (var index in indexes)
                 {
@@ -206,6 +230,31 @@ namespace GeoTectAI.ViewModels.Pages
             }
 
             return extractedData;
+        }
+
+        //检查是否为空行
+        private bool IsRowEmpty(DataRow row)
+        {
+            foreach (var item in row.ItemArray)
+            {
+                if (item != null && !string.IsNullOrWhiteSpace(item.ToString()))
+                {
+                    return false; // 行不为空
+                }
+            }
+            return true; // 行为空
+        }
+        //重载方法
+        private bool IsRowEmpty(ExcelWorksheet worksheet, int row, int colCount)
+        {
+            for (int col = 1; col <= colCount; col++)
+            {
+                if (!string.IsNullOrWhiteSpace(worksheet.Cells[row, col].Text))
+                {
+                    return false; // 行不为空
+                }
+            }
+            return true; // 行为空
         }
 
         //加载列名称
@@ -238,6 +287,7 @@ namespace GeoTectAI.ViewModels.Pages
                 // 添加行到DataTable
                 for (int row = 2; row <= rowCount; row++)
                 {
+                    if (IsRowEmpty(worksheet, row, colCount)) continue;
                     var newRow = dataTable.NewRow();
                     for (int col = 1; col <= colCount; col++)
                     {
@@ -374,6 +424,7 @@ namespace GeoTectAI.ViewModels.Pages
                 var temp = FileHelper.GetExcelFiles(false);
                 if (temp != null)
                 {
+                    Mask(true, LanguageService.Instance["Importing"]);
                     Data = ReadExcelFile(temp[0]);  //读取数据
                     LoadColumnNames();      //加载列名称
                     autoCheck();    //自动匹配
@@ -382,6 +433,7 @@ namespace GeoTectAI.ViewModels.Pages
                     {
                         MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_1"], ControlAppearance.Success);
                     });
+                    Mask(false, LanguageService.Instance["Importing"]);
                 }
                 else
                 {
@@ -410,47 +462,63 @@ namespace GeoTectAI.ViewModels.Pages
         [RelayCommand]
         private async void OnMultiplePredict()
         {
-            IsLoadVisible = Visibility.Visible;
+            if(Data == null)
+            {
+                MessageService.AutoShowDialog(LanguageService.Instance["Error"], LanguageService.Instance["Error_2"], ControlAppearance.Danger);
+            }
+            else
+            {
+                Mask(true, LanguageService.Instance["Predicting"]);
+                //ObservableCollection<ISeries> tempSeries = new ObservableCollection<ISeries>();
+                ObservableCollection<int> tempSeries = new ObservableCollection<int>();
+                // 获取当前程序路径
+                string appPath = System.IO.Directory.GetCurrentDirectory();
 
-            ObservableCollection<ISeries> tempSeries = new ObservableCollection<ISeries>(); 
-            // 获取当前程序路径
-            string appPath = System.IO.Directory.GetCurrentDirectory();
-
-            // 路径字典，方便根据ModelIndex索引模型
-            var models = new Dictionary<int, (string path, string name)>
+                // 路径字典，方便根据ModelIndex索引模型
+                var models = new Dictionary<int, (string path, string name)>
             {
                 { 3, (appPath + "\\Resources\\ML_Model\\ANN_model.onnx", "人工神经网络") },
                 { 1, (appPath + "\\Resources\\ML_Model\\RandomForest_model.onnx", "随机森林") },
                 { 2, (appPath + "\\Resources\\ML_Model\\XGBoosting_model.onnx", "XGBooting") },
             };
 
-            // 预测服务
-            string predictExePath = appPath + "\\Executables\\predict.exe";
-            PredictorService predictorService = new PredictorService(predictExePath);
+                // 预测服务
+                string predictExePath = appPath + "\\Executables\\predict.exe";
+                PredictorService predictorService = new PredictorService(predictExePath);
 
-            //预测结果
-            List<string> predictRes = new List<string>();
+                //预测结果
+                List<string> predictRes = new List<string>();
 
-            var multiple_Data = ExtractData();
-            if(models.ContainsKey(ModelIndex+1))
-            {
-                var model = models[ModelIndex+1];
-                foreach (var data in multiple_Data)
+                var multiple_Data = ExtractData();
+                if (models.ContainsKey(ModelIndex + 1))
                 {
-                    var (predictedClass, probabilities) = await predictorService.PredictAsync(model.path, data);
-                    predictRes.Add(CategoryMapper.GetCategoryName(predictedClass));
-                    tempSeries.Add(new ColumnSeries<int>
+                    var model = models[ModelIndex + 1];
+                    int progressIndex = 0;
+                    foreach (var data in multiple_Data)
                     {
-                        Values = Enumerable.Repeat(predictedClass + 1, 1),
-                    });
+                        progressIndex++;    //计算当前预测到那里了
+                        var (predictedClass, probabilities) = await predictorService.PredictAsync(model.path, data);
+                        predictRes.Add(CategoryMapper.GetCategoryName(predictedClass));     //记录预测结果
+                        tempSeries.Add(predictedClass + 1);
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            //通知前端
+                            Progress = LanguageService.Instance["Predicting"] + $"({progressIndex}/{multiple_Data.Count})";
+                        });
+                    }
                 }
+                //显示预测后的数据
+                DataTable temptable = Data.Copy();
+                AddColumnToDataTable(temptable, "pre_name", predictRes);
+                Data = temptable;
+                //绘图
+                PaintNightingaleRoseChart(tempSeries);
+                //允许导出
+                isPre = true;
+                //关闭遮罩
+                Mask(false, LanguageService.Instance["Predicting"]);
+                MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_3"], ControlAppearance.Success);
             }
-            DataTable temptable = Data.Copy();
-            AddColumnToDataTable(temptable, "pre_name", predictRes);
-            Data = temptable;
-            PaintNightingaleRoseChart(tempSeries);
-            IsLoadVisible = Visibility.Hidden;
-            MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_3"], ControlAppearance.Success);
         }
 
         //导出Excel
@@ -465,6 +533,7 @@ namespace GeoTectAI.ViewModels.Pages
             {
                 if (isPre)
                 {
+                    Mask(true, LanguageService.Instance["Exporting"]);
                     Task task = new Task(() =>
                     {
                         string appPath = System.IO.Directory.GetCurrentDirectory() + "\\Data_OutPut";
@@ -475,6 +544,7 @@ namespace GeoTectAI.ViewModels.Pages
                         {
                             MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_4"], ControlAppearance.Success);
                         });
+                        Mask(false, LanguageService.Instance["Exporting"]);
                     });
                     task.Start();
                 }

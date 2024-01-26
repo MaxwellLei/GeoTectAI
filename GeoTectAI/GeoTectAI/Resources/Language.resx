@@ -269,12 +269,18 @@
     <value>File Exported Successfully</value>
   </data>
   <data name="Error_3" xml:space="preserve">
-    <value>Please Perform Prediction First</value>
+    <value>Please Perform Predict First</value>
   </data>
   <data name="Success_5" xml:space="preserve">
     <value>File Location Opened</value>
   </data>
   <data name="Error_4" xml:space="preserve">
     <value>Index Out of Bounds</value>
+  </data>
+  <data name="Importing" xml:space="preserve">
+    <value>File loading...</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>File exporting...</value>
   </data>
 </root>

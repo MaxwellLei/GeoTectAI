@@ -196,7 +196,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Please Perform Prediction First 的本地化字符串。
+        ///   查找类似 Please Perform Predict First 的本地化字符串。
         /// </summary>
         internal static string Error_3 {
             get {
@@ -223,6 +223,15 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
+        ///   查找类似 File exporting... 的本地化字符串。
+        /// </summary>
+        internal static string Exporting {
+            get {
+                return ResourceManager.GetString("Exporting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Home 的本地化字符串。
         /// </summary>
         internal static string Home {
@@ -237,6 +246,15 @@ namespace GeoTectAI.Resources {
         internal static string Import_File {
             get {
                 return ResourceManager.GetString("Import_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 File loading... 的本地化字符串。
+        /// </summary>
+        internal static string Importing {
+            get {
+                return ResourceManager.GetString("Importing", resourceCulture);
             }
         }
         

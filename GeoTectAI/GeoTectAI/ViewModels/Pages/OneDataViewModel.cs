@@ -204,8 +204,8 @@ namespace GeoTectAI.ViewModels.Pages
             // 路径字典，方便根据ModelIndex索引模型
             var models = new Dictionary<int, (string path, string name)>
             {
-                { 3, (appPath + "\\Resources\\ML_Model\\ANN_model.onnx", "人工神经网络") },
-                { 1, (appPath + "\\Resources\\ML_Model\\RandomForest_model.onnx", "随机森林") },
+                { 3, (appPath + "\\Resources\\ML_Model\\ANN_model.onnx", "ANN") },
+                { 1, (appPath + "\\Resources\\ML_Model\\RandomForest_model.onnx", "Random Forest") },
                 { 2, (appPath + "\\Resources\\ML_Model\\XGBoosting_model.onnx", "XGBooting") },
             };
 

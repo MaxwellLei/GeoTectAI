@@ -238,8 +238,8 @@
                 <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" 
               BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" CornerRadius="10"
               Height="280">
-                    <lvc:CartesianChart Series="{Binding ViewModel.MyNightingaleRoseChartSeries}"
-                                        XAxes="{Binding ViewModel.XAxes}" YAxes="{Binding ViewModel.YAxes}"/>
+                    <lvc:PieChart Series="{Binding ViewModel.MyNightingaleRoseChartSeries}"
+                                  LegendPosition="Right" LegendTextPaint="{Binding ViewModel.LegendTextPaint}"/>
                 </Border>
                 <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" Grid.Column="2"
               BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" CornerRadius="10"
@@ -277,7 +277,7 @@
             <Border Background="{DynamicResource ApplicationBackgroundBrush}" CornerRadius="5"
                         BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1"/>
             <ui:LoadingScreen HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding [Predicting],Source={x:Static lg:LanguageService.Instance}}" VerticalAlignment="Center" HorizontalAlignment="Center"
+            <TextBlock Text="{Binding ViewModel.Progress}" VerticalAlignment="Center" HorizontalAlignment="Center"
                            Margin="0 100 0 0"/>
         </Grid>
     </Grid>
