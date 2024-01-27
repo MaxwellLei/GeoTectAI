@@ -23,7 +23,7 @@ If you have any bugs, please leave a message in the **Issues** of the project.
 
 ![image](https://github.com/MaxwellLei/GeoTectAI/assets/57181782/26ec2b65-765a-42c1-883a-d7cc79955460)
 
-![image](https://github.com/MaxwellLei/GeoTectAI/assets/57181782/faa2022a-8648-479c-bb56-eec1cbfddca9)
+![image](https://github.com/MaxwellLei/GeoTectAI/assets/57181782/27b6a083-63a2-4f85-8534-3d17fc2c08f2)
 
 ![image](https://github.com/MaxwellLei/GeoTectAI/assets/57181782/68d9508f-c6a1-4047-89aa-7761a75c2908)
 
