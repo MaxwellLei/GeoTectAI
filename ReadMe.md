@@ -1,17 +1,51 @@
 [⭐简体中文](https://github.com/MaxwellLei/GeoTectAI/tree/main/ReadMe_ZH_CN)
 
-# 📌Project description
+# Project Description
 
-This project is based on MVVM architecture, using WPF development techniques, and relies on the `.NET7` framework, which you can download and install via Releases next to the project **Predicting the geotectonic environment of magmatic rocks based on their whole-rock geochemical elements**.
+This project is based on the MVVM architecture, using WPF development technology, relying on the `.NET7 `framework, which you can download and install via the Releases section next to it, is a project that **predicts the corresponding tectonic environment based on the whole rock geochemical elements of magmatic rocks**.
 
-You can find the software installation package in Releases, regarding the naming instructions:
+Thanks to the following project dependency libraries, if you want to compile this project, please install the following library support first.
 
-* **DependencyFramework_FullPlatform** means it can **run on Windows, Linux, MacOS**, but **depends on the `.NET7` framework**, which means that if you want to run this program, you need to download and install the `.NET7` framework first before you can run it.
-* NET7 framework**, which means that if you want to run this program, you need to download and install the `.NET7` framework first.
+* [CommunityToolkit.Mvvm](https://www.nuget.org/packages/CommunityToolkit.Mvvm)
+* [EPPlus](https://www.epplussoftware.com/)
+* [Ookii.Dialogs](https://www.ookii.org/software/dialogs/)
+* [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/)
+* [Microsoft.Xaml.Behaviors.Wpf](https://www.nuget.org/packages/Microsoft.Xaml.Behaviors.Wpf)
+* [WPF-UI](https://wpfui.lepo.co/index.html)
+* [LiveCharts2](https://github.com/beto-rodriguez/LiveCharts2)
 
-If you have any bugs, please leave a message in the **Issues** of the project.
+You can find the software installation package in Releases, with naming instructions:
 
-> Project protocol: [Apache-2.0 license](https://github.com/MaxwellLei/GeoTectAI/tree/v1.0.0.0#)
+* **DependencyFramework_FullPlatform** means that it can **run on Windows, Linux, MacOS**, but **dependent The `.NET7`framework** means that if you wish to run this program you need to download and install it first `.NET7` framework.
+* **independence_win_x86** means that it runs only on the Windows platform and does not depend on the `.NET7` framework can be downloaded and unzipped directly to run.
+
+If you have any bugs in the process of use, you can leave a message under **Issues** of the project.
+
+> Project Agreement: [Apache-2.0 license] (https://github.com/MaxwellLei/GeoTectAI/tree/v1.0.0.0#)
+
+# Machine learning models
+
+## Datasets
+
+The data of the machine learning model trained by the project are derived from two large geochemical databases [PetDB](http://www.earthchem.org/petdb) and [GEOROC](http://georoc.mpch-mainz.gwdg.de/georoc/), and the dataset trained in this project is stored in the `Python-->Data` folder of the project.
+
+> If you have any other needs or questions, please contact me by private message.
+
+## About the code to train the model
+
+The code to train the model, neural network, convert to ONNX format, and package EXE will be stored in the `Python-->Code` folder.
+
+## Batch prediction
+
+1. Batch prediction import file only supports `Excel` type files (for example `.xlsx`). After importing the file, the **default first line is the title line** and reading the data will **try to automatically match attributes* *, the content in the title row will be retrieved, **not case sensitive to match the names corresponding to geochemical elements**, please check whether all columns are matched when making batch predictions.
+
+2. If a column is incorrectly matched, for example: the value of the `La` element is incorrectly matched to a `String` type column, it will be converted to `0f` by default and the prediction will continue with a warning message.
+
+3. After the batch prediction is successful, a column named `pre_name` will be added to the far right of the table. This column is the prediction results. These prediction results will be automatically mapped to the corresponding structural categories (not including the discrimination probability value).
+
+    > ⚠️: Please make sure that the header row of your imported `Excel` type file does not have a column header named `pre_name`, otherwise the content of the column will be overwritten after prediction.
+
+4. The export of batch prediction results only supports the `.xlsx` type. After export, the file will be in the `Data_OutPut` folder under the installation path of the software (if there is no such folder, the software will automatically create it). The export file name is The exported time is converted to `SHA` to name. You can directly locate the exported file by opening the file location.
 
 # 💡Project Principle
 
