@@ -1,4 +1,5 @@
-﻿using GeoTectAI.Models;
+﻿using GeoTectAI.Helpers;
+using GeoTectAI.Models;
 using GeoTectAI.Services;
 using LiveChartsCore;
 using LiveChartsCore.Kernel.Sketches;
@@ -137,7 +138,7 @@ namespace GeoTectAI.ViewModels.Pages
         {
             // 构造环境名称
             ObservableCollection<string> Categories = new ObservableCollection<string>
-            { "1", "2", "3", "4", "5", "6", "7", "8" };
+            { "1", "2", "3", "4", "5", "6", "7"};
 
             MyChartSeries = tempSeries;
 
@@ -210,7 +211,9 @@ namespace GeoTectAI.ViewModels.Pages
             };
 
             // 预测数据
-            var features = new float[] { SiO2, TiO2, Al2O3, CaO, MgO, MnO, K2O, Na2O, P2O5, La, Ce, Pr, Nd, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu };
+            var norm_features = new float[] { SiO2, TiO2, Al2O3, CaO, MgO, MnO, K2O, Na2O, P2O5, La, Ce, Pr, Nd, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu };
+            var preprocessor = new DataPreprocessor();
+            var features = preprocessor.NormalizeFeatures(norm_features);
 
             // 预测服务
             string predictExePath = appPath + "\\Executables\\predict.exe";

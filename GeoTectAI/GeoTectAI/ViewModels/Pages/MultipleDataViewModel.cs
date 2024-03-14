@@ -489,7 +489,8 @@ namespace GeoTectAI.ViewModels.Pages
                 //预测结果
                 List<string> predictRes = new List<string>();
 
-                var multiple_Data = ExtractData();
+                var preprocessor = new DataPreprocessor();
+                var multiple_Data = preprocessor.NormalizeData(ExtractData());
                 if (models.ContainsKey(ModelIndex + 1))
                 {
                     var model = models[ModelIndex + 1];

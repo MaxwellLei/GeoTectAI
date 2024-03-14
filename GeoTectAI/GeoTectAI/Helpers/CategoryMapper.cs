@@ -11,13 +11,12 @@ namespace GeoTectAI.Models
         private static readonly Dictionary<int, string> CategoryMapping = new Dictionary<int, string>
         {
             { 0, "Archean Cratons (incl. Greenstone Belts)" },
-            { 1, "Complex Volcanic Settings" },
-            { 2, "Continental Flood Basalts" },
-            { 3, "Convergent Margins" },
-            { 4, "Intracontinental Volcanics" },
-            { 5, "Ocean Islands" },
-            { 6, "Rift Volcanics" },
-            { 7, "Seamounts" }
+            { 1, "Continental Flood Basalts" },
+            { 2, "Convergent Margins" },
+            { 3, "Intracontinental Volcanics" },
+            { 4, "Ocean Islands" },
+            { 5, "Rift Volcanics" },
+            { 6, "Seamounts" }
         };
 
         public static string GetCategoryName(int categoryCode)

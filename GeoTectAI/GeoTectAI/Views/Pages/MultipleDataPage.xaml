@@ -254,18 +254,17 @@
                             </DockPanel>
                             <StackPanel Margin="10">
                                 <TextBlock FontSize="20" FontWeight="Bold"  Text="{Binding [Category_Mapping],Source={x:Static lg:LanguageService.Instance}}"/>
-                                <TextBlock Text="1: Archean Cratons (incl. Greenstone Belts)" TextWrapping="Wrap"
+                                <TextBlock Text="1: Archean Cratons" TextWrapping="Wrap"
                                    Margin="0 3" FontWeight="Bold"/>
-                                <TextBlock Text="2: Complex Volcanic Settings" TextWrapping="Wrap" FontWeight="Bold"/>
-                                <TextBlock Text="3: Continental Flood Basalts" TextWrapping="Wrap"
+                                <TextBlock Text="2: Continental Flood Basalts" TextWrapping="Wrap"
                                    Margin="0 3" FontWeight="Bold"/>
-                                <TextBlock Text="4: Convergent Margins" TextWrapping="Wrap" FontWeight="Bold"/>
-                                <TextBlock Text="5: Intracontinental Volcanics" TextWrapping="Wrap"
+                                <TextBlock Text="3: Convergent Margins" TextWrapping="Wrap" FontWeight="Bold"/>
+                                <TextBlock Text="4: Intracontinental Volcanics" TextWrapping="Wrap"
                                    Margin="0 3" FontWeight="Bold"/>
-                                <TextBlock Text="6: Ocean Islands" TextWrapping="Wrap" FontWeight="Bold"/>
-                                <TextBlock Text="7: Rift Volcanics" TextWrapping="Wrap"
+                                <TextBlock Text="5: Ocean Islands" TextWrapping="Wrap" FontWeight="Bold"/>
+                                <TextBlock Text="6: Rift Volcanics" TextWrapping="Wrap"
                                    Margin="0 3" FontWeight="Bold"/>
-                                <TextBlock Text="8: Seamounts" TextWrapping="Wrap" FontWeight="Bold"/>
+                                <TextBlock Text="7: Seamounts" TextWrapping="Wrap" FontWeight="Bold"/>
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
