@@ -214,6 +214,15 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Please select an input mapping.. 的本地化字符串。
+        /// </summary>
+        internal static string Error_5 {
+            get {
+                return ResourceManager.GetString("Error_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Export as Excel 的本地化字符串。
         /// </summary>
         internal static string Export_As_Excel {
@@ -318,6 +327,42 @@ namespace GeoTectAI.Resources {
         internal static string M_Predict {
             get {
                 return ResourceManager.GetString("M_Predict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Mapping match pattern 的本地化字符串。
+        /// </summary>
+        internal static string Mapping_Match {
+            get {
+                return ResourceManager.GetString("Mapping_Match", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 In multiple predictions, automatically match Excel list names and input element mapping modes 的本地化字符串。
+        /// </summary>
+        internal static string Mapping_Match_D {
+            get {
+                return ResourceManager.GetString("Mapping_Match_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Fuzzy mapping 的本地化字符串。
+        /// </summary>
+        internal static string Mapping_Match_P1 {
+            get {
+                return ResourceManager.GetString("Mapping_Match_P1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Strict mapping 的本地化字符串。
+        /// </summary>
+        internal static string Mapping_Match_P2 {
+            get {
+                return ResourceManager.GetString("Mapping_Match_P2", resourceCulture);
             }
         }
         

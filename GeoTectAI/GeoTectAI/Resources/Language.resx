@@ -283,4 +283,19 @@
   <data name="Exporting" xml:space="preserve">
     <value>File exporting...</value>
   </data>
+  <data name="Error_5" xml:space="preserve">
+    <value>Please select an input mapping..</value>
+  </data>
+  <data name="Mapping_Match" xml:space="preserve">
+    <value>Mapping match pattern</value>
+  </data>
+  <data name="Mapping_Match_D" xml:space="preserve">
+    <value>In multiple predictions, automatically match Excel list names and input element mapping modes</value>
+  </data>
+  <data name="Mapping_Match_P1" xml:space="preserve">
+    <value>Fuzzy mapping</value>
+  </data>
+  <data name="Mapping_Match_P2" xml:space="preserve">
+    <value>Strict mapping</value>
+  </data>
 </root>

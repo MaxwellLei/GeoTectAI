@@ -116,6 +116,28 @@
                 </WrapPanel>
             </ui:CardControl.Content>
         </ui:CardControl>
+        <ui:CardControl Margin="0 8 0 0">
+            <ui:CardControl.Icon>
+                <ui:SymbolIcon Symbol="BranchCompare24"/>
+            </ui:CardControl.Icon>
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock Text="{Binding [Mapping_Match],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding [Mapping_Match_D], Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ui:CardControl.Content>
+                <ComboBox SelectedIndex="{Binding ViewModel.MappingMode}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ViewModel.AutoMappingModeCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Content="{Binding [Mapping_Match_P1],Source={x:Static lg:LanguageService.Instance}}"/>
+                    <ComboBoxItem Content="{Binding [Mapping_Match_P2],Source={x:Static lg:LanguageService.Instance}}"/>
+                </ComboBox>
+            </ui:CardControl.Content>
+        </ui:CardControl>
 
         <!--关于-->
         <TextBlock

@@ -339,35 +339,92 @@ namespace GeoTectAI.ViewModels.Pages
             return index ?? -1;
         }
 
+        private int FindIndexIgnoreCaseAndContains(ObservableCollection<string> collection, string value)
+        {
+            // 检索集合中包含指定字符串的索引
+            var index = collection
+                .Select((s, i) => new { String = s, Index = i })
+                .FirstOrDefault(x => x.String.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0)
+                ?.Index;
+
+            // 如果找到了包含指定字符串的匹配项，返回索引；否则返回 -1
+            return index ?? -1;
+        }
+
         //自动匹配
         private void autoCheck()
         {
-            //主量元素
-            SiO2Index = FindIndexIgnoreCase(ColumnNames, "SIO2");
-            TiO2Index = FindIndexIgnoreCase(ColumnNames, "TiO2");
-            Al2O3Index = FindIndexIgnoreCase(ColumnNames, "Al2O3");
-            CaOIndex = FindIndexIgnoreCase(ColumnNames, "CaO");
-            MgOIndex = FindIndexIgnoreCase(ColumnNames, "MgO");
-            MnOIndex = FindIndexIgnoreCase(ColumnNames, "MnO");
-            K2OIndex = FindIndexIgnoreCase(ColumnNames, "K2O");
-            Na2OIndex = FindIndexIgnoreCase(ColumnNames, "Na2O");
-            P2O5Index = FindIndexIgnoreCase(ColumnNames, "P2O5");
+            if(ConfigHelper.ReadConfig("MappingMode") == "0")
+            {
+                //主量元素
+                SiO2Index = FindIndexIgnoreCaseAndContains(ColumnNames, "SIO2");
+                TiO2Index = FindIndexIgnoreCaseAndContains(ColumnNames, "TiO2");
+                Al2O3Index = FindIndexIgnoreCaseAndContains(ColumnNames, "Al2O3");
+                CaOIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "CaO");
+                MgOIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "MgO");
+                MnOIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "MnO");
+                K2OIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "K2O");
+                Na2OIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "Na2O");
+                P2O5Index = FindIndexIgnoreCaseAndContains(ColumnNames, "P2O5");
 
-            //微量元素
-            LaIndex = FindIndexIgnoreCase(ColumnNames, "La");
-            CeIndex = FindIndexIgnoreCase(ColumnNames, "Ce");
-            PrIndex = FindIndexIgnoreCase(ColumnNames, "pr");
-            NdIndex = FindIndexIgnoreCase(ColumnNames, "nd");
-            SmIndex = FindIndexIgnoreCase(ColumnNames, "sm");
-            EuIndex = FindIndexIgnoreCase(ColumnNames, "eu");
-            GdIndex = FindIndexIgnoreCase(ColumnNames, "gd");
-            TbIndex = FindIndexIgnoreCase(ColumnNames, "tb");
-            DyIndex = FindIndexIgnoreCase(ColumnNames, "dy");
-            HoIndex = FindIndexIgnoreCase(ColumnNames, "ho");
-            ErIndex = FindIndexIgnoreCase(ColumnNames, "er");
-            TmIndex = FindIndexIgnoreCase(ColumnNames, "tm");
-            YbIndex = FindIndexIgnoreCase(ColumnNames, "yb");
-            LuIndex = FindIndexIgnoreCase(ColumnNames, "lu");
+                //微量元素
+                LaIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "La");
+                CeIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "Ce");
+                PrIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "pr");
+                NdIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "nd");
+                SmIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "sm");
+                EuIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "eu");
+                GdIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "gd");
+                TbIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "tb");
+                DyIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "dy");
+                HoIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "ho");
+                ErIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "er");
+                TmIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "tm");
+                YbIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "yb");
+                LuIndex = FindIndexIgnoreCaseAndContains(ColumnNames, "lu");
+            }
+            else
+            {
+                //主量元素
+                SiO2Index = FindIndexIgnoreCase(ColumnNames, "SIO2");
+                TiO2Index = FindIndexIgnoreCase(ColumnNames, "TiO2");
+                Al2O3Index = FindIndexIgnoreCase(ColumnNames, "Al2O3");
+                CaOIndex = FindIndexIgnoreCase(ColumnNames, "CaO");
+                MgOIndex = FindIndexIgnoreCase(ColumnNames, "MgO");
+                MnOIndex = FindIndexIgnoreCase(ColumnNames, "MnO");
+                K2OIndex = FindIndexIgnoreCase(ColumnNames, "K2O");
+                Na2OIndex = FindIndexIgnoreCase(ColumnNames, "Na2O");
+                P2O5Index = FindIndexIgnoreCase(ColumnNames, "P2O5");
+
+                //微量元素
+                LaIndex = FindIndexIgnoreCase(ColumnNames, "La");
+                CeIndex = FindIndexIgnoreCase(ColumnNames, "Ce");
+                PrIndex = FindIndexIgnoreCase(ColumnNames, "pr");
+                NdIndex = FindIndexIgnoreCase(ColumnNames, "nd");
+                SmIndex = FindIndexIgnoreCase(ColumnNames, "sm");
+                EuIndex = FindIndexIgnoreCase(ColumnNames, "eu");
+                GdIndex = FindIndexIgnoreCase(ColumnNames, "gd");
+                TbIndex = FindIndexIgnoreCase(ColumnNames, "tb");
+                DyIndex = FindIndexIgnoreCase(ColumnNames, "dy");
+                HoIndex = FindIndexIgnoreCase(ColumnNames, "ho");
+                ErIndex = FindIndexIgnoreCase(ColumnNames, "er");
+                TmIndex = FindIndexIgnoreCase(ColumnNames, "tm");
+                YbIndex = FindIndexIgnoreCase(ColumnNames, "yb");
+                LuIndex = FindIndexIgnoreCase(ColumnNames, "lu");
+            }
+        }
+
+        //数据验证
+        private bool CheckInput()
+        {
+            int[] values = { SiO2Index, TiO2Index, Al2O3Index, CaOIndex, MgOIndex, 
+                             MnOIndex, K2OIndex, Na2OIndex, P2O5Index, LaIndex, CeIndex,
+                             PrIndex, NdIndex, SmIndex, EuIndex, GdIndex, TbIndex, DyIndex,
+                             HoIndex, ErIndex, TmIndex, YbIndex, LuIndex };
+
+            bool hasNegativeOne = values.Any(x => x == -1);
+
+            return hasNegativeOne;
         }
 
         //导出为excel文件
@@ -458,6 +515,7 @@ namespace GeoTectAI.ViewModels.Pages
             MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_2"], ControlAppearance.Success);
         }
 
+
         //批量预测
         [RelayCommand]
         private async void OnMultiplePredict()
@@ -468,57 +526,66 @@ namespace GeoTectAI.ViewModels.Pages
             }
             else
             {
-                Mask(true, LanguageService.Instance["Predicting"]);
-                //ObservableCollection<ISeries> tempSeries = new ObservableCollection<ISeries>();
-                ObservableCollection<int> tempSeries = new ObservableCollection<int>();
-                // 获取当前程序路径
-                string appPath = System.IO.Directory.GetCurrentDirectory();
-
-                // 路径字典，方便根据ModelIndex索引模型
-                var models = new Dictionary<int, (string path, string name)>
-            {
-                { 3, (appPath + "\\Resources\\ML_Model\\ANN_model.onnx", "人工神经网络") },
-                { 1, (appPath + "\\Resources\\ML_Model\\RandomForest_model.onnx", "随机森林") },
-                { 2, (appPath + "\\Resources\\ML_Model\\XGBoosting_model.onnx", "XGBooting") },
-            };
-
-                // 预测服务
-                string predictExePath = appPath + "\\Executables\\predict.exe";
-                PredictorService predictorService = new PredictorService(predictExePath);
-
-                //预测结果
-                List<string> predictRes = new List<string>();
-
-                var preprocessor = new DataPreprocessor();
-                var multiple_Data = preprocessor.NormalizeData(ExtractData());
-                if (models.ContainsKey(ModelIndex + 1))
+                if (!CheckInput())
                 {
-                    var model = models[ModelIndex + 1];
-                    int progressIndex = 0;
-                    foreach (var data in multiple_Data)
+                    var tempsss = LaIndex;
+                    Mask(true, LanguageService.Instance["Predicting"]);
+                    //ObservableCollection<ISeries> tempSeries = new ObservableCollection<ISeries>();
+                    ObservableCollection<int> tempSeries = new ObservableCollection<int>();
+                    // 获取当前程序路径
+                    string appPath = System.IO.Directory.GetCurrentDirectory();
+
+                    // 路径字典，方便根据ModelIndex索引模型
+                    var models = new Dictionary<int, (string path, string name)>
                     {
-                        progressIndex++;    //计算当前预测到那里了
-                        var (predictedClass, probabilities) = await predictorService.PredictAsync(model.path, data);
-                        predictRes.Add(CategoryMapper.GetCategoryName(predictedClass));     //记录预测结果
-                        tempSeries.Add(predictedClass + 1);
-                        Application.Current.Dispatcher.Invoke(() =>
+                        { 3, (appPath + "\\Resources\\ML_Model\\ANN_model.onnx", "人工神经网络") },
+                        { 1, (appPath + "\\Resources\\ML_Model\\RandomForest_model.onnx", "随机森林") },
+                        { 2, (appPath + "\\Resources\\ML_Model\\XGBoosting_model.onnx", "XGBooting") },
+                    };
+
+                    // 预测服务
+                    string predictExePath = appPath + "\\Executables\\predict.exe";
+                    PredictorService predictorService = new PredictorService(predictExePath);
+
+                    //预测结果
+                    List<string> predictRes = new List<string>();
+
+                    var preprocessor = new DataPreprocessor();
+                    var multiple_Data = preprocessor.NormalizeData(ExtractData());
+                    if (models.ContainsKey(ModelIndex + 1))
+                    {
+                        var model = models[ModelIndex + 1];
+                        int progressIndex = 0;
+                        foreach (var data in multiple_Data)
                         {
-                            //通知前端
-                            Progress = LanguageService.Instance["Predicting"] + $"({progressIndex}/{multiple_Data.Count})";
-                        });
+                            progressIndex++;    //计算当前预测到那里了
+                            var (predictedClass, probabilities) = await predictorService.PredictAsync(model.path, data);
+                            predictRes.Add(CategoryMapper.GetCategoryName(predictedClass));     //记录预测结果
+                            tempSeries.Add(predictedClass + 1);
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                //通知前端
+                                Progress = LanguageService.Instance["Predicting"] + $"({progressIndex}/{multiple_Data.Count})";
+                            });
+                        }
                     }
+                    //显示预测后的数据
+                    DataTable temptable = Data.Copy();
+                    AddColumnToDataTable(temptable, "pre_name", predictRes);
+                    Data = temptable;
+                    //绘图
+                    PaintNightingaleRoseChart(tempSeries);
+                    //允许导出
+                    isPre = true;
+                    //关闭遮罩
+                    Mask(false, LanguageService.Instance["Predicting"]);
+                    MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_3"], ControlAppearance.Success);
                 }
-                //显示预测后的数据
-                DataTable temptable = Data.Copy();
-                AddColumnToDataTable(temptable, "pre_name", predictRes);
-                Data = temptable;
-                //绘图
-                PaintNightingaleRoseChart(tempSeries);
-                //允许导出
-                isPre = true;
-                //关闭遮罩
-                Mask(false, LanguageService.Instance["Predicting"]);
-                MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_3"], ControlAppearance.Success);
+                else
+                {
+                    MessageService.AutoShowDialog(LanguageService.Instance["Error"], LanguageService.Instance["Error_5"], ControlAppearance.Danger);
+                }
+                
             }
         }
 

@@ -26,6 +26,10 @@ namespace GeoTectAI.ViewModels.Pages
         [ObservableProperty]
         private int? _currentPopUp;
 
+        //匹配模式【0，模糊匹配；1，严格匹配】
+        [ObservableProperty]
+        private int? _mappingMode;
+
         //静默通知时间
         [ObservableProperty]
         private int? _currentPopTime;
@@ -56,6 +60,7 @@ namespace GeoTectAI.ViewModels.Pages
             CurrentLanguage = Convert.ToInt32(ConfigHelper.ReadConfig("Language"));
             CurrentPopUp = Convert.ToInt32(ConfigHelper.ReadConfig("NotificationMode"));
             CurrentPopTime = Convert.ToInt32(ConfigHelper.ReadConfig("NotificationTime"));
+            MappingMode = Convert.ToInt32(ConfigHelper.ReadConfig("MappingMode"));
         }
 
 
@@ -114,6 +119,17 @@ namespace GeoTectAI.ViewModels.Pages
             {
                 //写入配置文件
                 ConfigHelper.WriteConfig("NotificationMode", CurrentPopUp.ToString());
+            }
+        }
+
+        //自动匹配模式
+        [RelayCommand]
+        private void OnAutoMappingMode()
+        {
+            if (MappingMode != null)
+            {
+                //写入配置文件
+                ConfigHelper.WriteConfig("MappingMode", MappingMode.ToString());
             }
         }
 
