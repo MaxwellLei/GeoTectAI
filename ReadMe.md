@@ -2,7 +2,7 @@
 
 # Project Description
 
-This project is based on the MVVM architecture, using WPF development technology, relying on the `.NET7 `framework, which you can download and install via the Releases section next to it, is a project that **predicts the corresponding tectonic environment based on the whole rock geochemical elements of magmatic rocks**.
+This project is based on the MVVM architecture, using WPF development technology, relying on the `.NET7 `framework, which you can download and install via the Releases section next to it, is a project that **predicts the corresponding tectonic setting based on the whole rock geochemical elements of igneous rocks**.
 
 Thanks to the following project dependency libraries, if you want to compile this project, please install the following library support first.
 
