@@ -21,23 +21,25 @@ You can find the software installation package in Releases, with naming instruct
 
 If you have any bugs in the process of use, you can leave a message under **Issues** of the project.
 
-> Project Agreement: [Apache-2.0 license] (https://github.com/MaxwellLei/GeoTectAI/tree/v1.0.0.0#)
+> Project Agreement: [Apache-2.0 license](https://github.com/MaxwellLei/GeoTectAI/tree/v1.0.0.0#)
 
 # Machine learning models
 
 ## Datasets
 
-The data of the machine learning model trained by the project are derived from two large geochemical databases [PetDB](http://www.earthchem.org/petdb) and [GEOROC](http://georoc.mpch-mainz.gwdg.de/georoc/), and the dataset trained in this project is stored in the `Python-->Data` folder of the project.
+The project training machine learning model data comes from two large geochemical databases [PetDB](http://www.earthchem.org/petdb) and [GEOROC](http://georoc.mpch-mainz.gwdg.de/georoc /) (🌹**Thanks to the database and many researchers for providing data support**🌹), the training data set of this project is stored in the `DataSet` file of the project
 
 > If you have any other needs or questions, please contact me by private message.
 
 ## About the code to train the model
 
-The code to train the model, neural network, convert to ONNX format, and package EXE will be stored in the `Python-->Code` folder.
+The code to train the model, neural network, convert to ONNX format, and package EXE will be stored in the `Python` folder.
+
+> ⚠️Please note: When calling the code, please make sure you have installed the relevant `Python` package dependencies
 
 ## Batch prediction
 
-1. Batch prediction import file only supports `Excel` type files (for example `.xlsx`). After importing the file, the **default first line is the title line** and reading the data will **try to automatically match attributes* *, the content in the title row will be retrieved, **not case sensitive to match the names corresponding to geochemical elements**, please check whether all columns are matched when making batch predictions.
+1. Batch prediction import file **only supports `Excel` type files** (for example `.xlsx`). After importing the file, the **default first line is the title line**, and the read data will **try to automatically match Attribute **, the content in the title row will be retrieved, **is not case-sensitive to match the names corresponding to geochemical elements (only relevant element strings are included) **, please check whether all match when making batch predictions On the list. The default is fuzzy matching, which will determine whether the list name contains a string corresponding to the geochemical element for matching. Compared with strict matching, it is more flexible. You can modify the matching mode through settings.
 
 2. If a column is incorrectly matched, for example: the value of the `La` element is incorrectly matched to a `String` type column, it will be converted to `0f` by default and the prediction will continue with a warning message.
 
@@ -49,9 +51,13 @@ The code to train the model, neural network, convert to ONNX format, and package
 
 # 💡Project Principle
 
-1. first use `Python` to train machine learning models
-2. then package the model as an `EXE`, pass in the parameters, and return the results.
-3. use WPF to do the front-end of the software and some read verification, the prediction process calls `EXE` and returns the result.
+1. First use `Python` to train machine learning models.
+2. Then package and read the `EXE` of the machine learning model, pass in the parameters, and return the results.
+3. Use WPF to do the front-end of the software and some read verification, the prediction process calls `EXE` and returns the result.
+
+> 🤔: Regarding why I chose to use this method, I initially tried to use Microsoft’s onnx library to directly call the trained model file, so that I didn’t need to go through Python to fiddle with it. After trying it, I found that this method would make my software The size is doubled. Compared with directly using Python to write an intermediate EXE and then calling it, a lot of space can be left.
+>
+> 🧐: If you ask me why I don’t consider using `PyQT` to write directly, this is very good in terms of efficiency and development speed. On the one hand, I have been using `C#` for a longer time and am more familiar with it. On the other hand, I think the interface written in `WPF` is more beautiful and flexible than `PyQT`.
 
 # 🌹Project Screenshots
 
