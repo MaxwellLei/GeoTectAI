@@ -70,7 +70,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Predict Tectonic Setting Based on Your Mafic Rock Whole-Rock Geochemical Elements 的本地化字符串。
+        ///   查找类似 Predict the corresponding tectonic environment based on the whole-rock geochemical element data of your igneous rocks. 的本地化字符串。
         /// </summary>
         internal static string About_D {
             get {
@@ -88,7 +88,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Networks composed of nodes and weighted connections, inspired by biological neural networks. Includes input, hidden, and output layers, learning complex nonlinear relationships. 的本地化字符串。
+        ///   查找类似 A network composed of nodes and weighted connections inspired by biological neural networks. It includes an input layer, hidden layers, and an output layer, learning complex nonlinear relationships. 的本地化字符串。
         /// </summary>
         internal static string ANN_Title_D {
             get {
@@ -106,7 +106,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Automatic Shutdown 的本地化字符串。
+        ///   查找类似 Auto Shutdown 的本地化字符串。
         /// </summary>
         internal static string Automatic_S_Time {
             get {
@@ -115,7 +115,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Shutdown Time for Messages Under Silent Notification 的本地化字符串。
+        ///   查找类似 Message duration (only effective for silent notifications) 的本地化字符串。
         /// </summary>
         internal static string Automatic_S_Time_D {
             get {
@@ -124,7 +124,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Category Mapping 的本地化字符串。
+        ///   查找类似 Tectonic Setting Mapping 的本地化字符串。
         /// </summary>
         internal static string Category_Mapping {
             get {
@@ -178,7 +178,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Invalid Input Data Detected, Converted to 0 的本地化字符串。
+        ///   查找类似 Invalid input data has been converted to 0. 的本地化字符串。
         /// </summary>
         internal static string Error_1 {
             get {
@@ -187,7 +187,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Please Import Data 的本地化字符串。
+        ///   查找类似 Please import the data. 的本地化字符串。
         /// </summary>
         internal static string Error_2 {
             get {
@@ -196,7 +196,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Please Perform Predict First 的本地化字符串。
+        ///   查找类似 Please proceed with the prediction first. 的本地化字符串。
         /// </summary>
         internal static string Error_3 {
             get {
@@ -205,7 +205,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Index Out of Bounds 的本地化字符串。
+        ///   查找类似 Index out of bounds. 的本地化字符串。
         /// </summary>
         internal static string Error_4 {
             get {
@@ -214,7 +214,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Please select an input mapping.. 的本地化字符串。
+        ///   查找类似 Please select the input mapping... 的本地化字符串。
         /// </summary>
         internal static string Error_5 {
             get {
@@ -223,7 +223,16 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Export as Excel 的本地化字符串。
+        ///   查找类似 The majority of input values are empty. Please check the input data. 的本地化字符串。
+        /// </summary>
+        internal static string Error_6 {
+            get {
+                return ResourceManager.GetString("Error_6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Export as an Excel file. 的本地化字符串。
         /// </summary>
         internal static string Export_As_Excel {
             get {
@@ -246,6 +255,24 @@ namespace GeoTectAI.Resources {
         internal static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 This application utilizes the whole rock geochemical elements of igneous rocks to determine their tectonic settings without the need for knowledge of machine learning. You can make selections using the left-hand sidebar. 的本地化字符串。
+        /// </summary>
+        internal static string Home_D_1 {
+            get {
+                return ResourceManager.GetString("Home_D_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The distribution of the training data for the machine learning models in this application is shown in the figure below. The distinguishable tectonic setting categories are illustrated in Figure 2. 的本地化字符串。
+        /// </summary>
+        internal static string Home_D_2 {
+            get {
+                return ResourceManager.GetString("Home_D_2", resourceCulture);
             }
         }
         
@@ -277,7 +304,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Cancel File Import 的本地化字符串。
+        ///   查找类似 File import has been canceled. 的本地化字符串。
         /// </summary>
         internal static string Info_1 {
             get {
@@ -304,7 +331,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Select Your Software Language (Some Translations Require Restarting the Software to Take Effect) 的本地化字符串。
+        ///   查找类似 Select your software language (some translations may take effect after restarting the software). 的本地化字符串。
         /// </summary>
         internal static string Languages_D {
             get {
@@ -340,7 +367,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 In multiple predictions, automatically match Excel list names and input element mapping modes 的本地化字符串。
+        ///   查找类似 In batch prediction, automatically match the Excel list names with the input element mapping schema. 的本地化字符串。
         /// </summary>
         internal static string Mapping_Match_D {
             get {
@@ -394,7 +421,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Import Your File for Batch Prediction 的本地化字符串。
+        ///   查找类似 Import your file for batch prediction. 的本地化字符串。
         /// </summary>
         internal static string MPrediction_D {
             get {
@@ -466,6 +493,15 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Open source project address 的本地化字符串。
+        /// </summary>
+        internal static string Project_Location {
+            get {
+                return ResourceManager.GetString("Project_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Project Dependency Support 的本地化字符串。
         /// </summary>
         internal static string Project_Support {
@@ -484,7 +520,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 An ensemble learning method using multiple decision trees for prediction. It randomly selects samples and features for training and combines predictions of all trees through voting or averaging. 的本地化字符串。
+        ///   查找类似 An ensemble learning method that makes predictions by constructing multiple decision trees. During training, it randomly selects samples and features, and combines the predictions of all trees using majority voting or averaging. 的本地化字符串。
         /// </summary>
         internal static string RF_Title_D {
             get {
@@ -583,7 +619,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Univaricate Predict 的本地化字符串。
+        ///   查找类似 Single Predict 的本地化字符串。
         /// </summary>
         internal static string UPrediction {
             get {
@@ -619,7 +655,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Major Chemical Elements Constituting Rocks 的本地化字符串。
+        ///   查找类似 Major chemical elements of igneous rocks. 的本地化字符串。
         /// </summary>
         internal static string WholeRock_ME_D {
             get {
@@ -637,7 +673,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Trace Chemical Elements Constituting Rocks 的本地化字符串。
+        ///   查找类似 Trace chemical elements of igneous rocks. 的本地化字符串。
         /// </summary>
         internal static string WholeRock_TE_D {
             get {
@@ -655,7 +691,7 @@ namespace GeoTectAI.Resources {
         }
         
         /// <summary>
-        ///   查找类似 An efficient implementation of gradient boosting. Adds new weak learners (usually decision trees) incrementally, focusing on reducing prediction errors and improving model accuracy. 的本地化字符串。
+        ///   查找类似 An efficient implementation of the gradient boosting algorithm. It incrementally adds new weak learners (typically decision trees), focusing on reducing prediction errors and improving model accuracy. 的本地化字符串。
         /// </summary>
         internal static string XGB_Title_D {
             get {

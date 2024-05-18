@@ -24,8 +24,10 @@
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
-                        <TextBlock Text="{Binding [Model],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding [Model_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
+                        <TextBlock Text="{Binding [Model],Source={x:Static lg:LanguageService.Instance}}" 
+                                   FontWeight="Bold" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding [Model_D],Source={x:Static lg:LanguageService.Instance}}" 
+                                   FontSize="12" TextWrapping="Wrap"/>
                     </StackPanel>
                 </ui:CardControl.Header>
                 <ui:CardControl.Content>

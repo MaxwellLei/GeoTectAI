@@ -13,13 +13,14 @@
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    xmlns:lg="clr-namespace:GeoTectAI.Services"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
     <StackPanel>
-        <ui:TextBlock Text="This application utilizes the whole rock geochemical elements of igneous rocks to determine their tectonic settings without the need for knowledge of machine learning. You can make selections using the left-hand sidebar."
+        <ui:TextBlock Text="{Binding [Home_D_1],Source={x:Static lg:LanguageService.Instance}}"
                       TextWrapping="Wrap"/>
-        <ui:TextBlock Text="The distribution of the training data for the machine learning model of this application is shown in the figure below. The distinguishable tectonic settings categories are illustrated in Figure 2."
+        <ui:TextBlock Text="{Binding [Home_D_2],Source={x:Static lg:LanguageService.Instance}}"
                       TextWrapping="Wrap" Margin="0 5"/>
         <ui:Image Source="/Assets/Figure2.jpg" CornerRadius="8" Margin="0 5"/>
         <ui:Image Source="/Assets/Figure3.jpg" CornerRadius="8"/>

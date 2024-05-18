@@ -2,9 +2,9 @@
 
 # Project Description
 
-This project is based on the MVVM architecture, using WPF development technology, relying on the `.NET7 `framework, which you can download and install via the Releases section next to it, is a project that **predicts the corresponding tectonic setting based on the whole rock geochemical elements of igneous rocks**.
+This project is based on the MVVM architecture, using WPF development technology, and relies on the `.NET7` framework. You can download and use it through the Releases section. The project is **based on the whole-rock geochemistry of igneous rocks to predict their corresponding tectonic settings**.
 
-Thanks to the following project dependency libraries, if you want to compile this project, please install the following library support first.
+Thanks to the following project dependency libraries. If you want to compile or develop this project further, please install the following libraries first.
 
 * [CommunityToolkit.Mvvm](https://www.nuget.org/packages/CommunityToolkit.Mvvm)
 * [EPPlus](https://www.epplussoftware.com/)
@@ -27,7 +27,7 @@ If you have any bugs in the process of use, you can leave a message under **Issu
 
 ## Datasets
 
-The project training machine learning model data comes from two large geochemical databases [PetDB](http://www.earthchem.org/petdb) and [GEOROC](http://georoc.mpch-mainz.gwdg.de/georoc /) (🌹**Thanks to the database and many researchers for providing data support**🌹), the training data set of this project is stored in the `DataSet` file of the project
+The project training machine learning model data comes from two large geochemical databases [PetDB](http://www.earthchem.org/petdb) and [GEOROC](http://georoc.mpch-mainz.gwdg.de/georoc /) (🌹**Thanks to the database and many researchers for providing data support**🌹), the training data set of this project is stored in the `DataSet` file of the project.
 
 > If you have any other needs or questions, please contact me by private message.
 

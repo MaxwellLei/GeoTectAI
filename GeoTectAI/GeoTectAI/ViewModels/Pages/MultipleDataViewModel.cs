@@ -38,6 +38,9 @@ namespace GeoTectAI.ViewModels.Pages
         private DataTable _data;    //读取的excel数据
 
         [ObservableProperty]
+        private ObservableCollection<ISeries> _seriesCollection;    //读取的excel数据
+
+        [ObservableProperty]
         private ObservableCollection<string> _columnNames;      //列名称
 
         [ObservableProperty]
@@ -139,6 +142,7 @@ namespace GeoTectAI.ViewModels.Pages
         {
             // 设置 EPPlus 的 LicenseContext
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            //SeriesCollection = new ObservableCollection<ISeries>();
 
             _isInitialized = true;
         }
@@ -189,6 +193,25 @@ namespace GeoTectAI.ViewModels.Pages
             series.RelativeInnerRadius = 8;
         }
 
+        public void PlotBoxSeries(List<float[]> extractedData, ObservableCollection<ISeries> seriesCollection)
+        {
+            seriesCollection.Clear();
+
+            // 遍历每个属性列
+            for (int i = 0; i < extractedData[0].Length; i++)
+            {
+                var dataForSeries = extractedData.Select(row => row[i]).ToArray();
+
+                var boxSeries = new BoxSeries<float>
+                {
+                    Values = dataForSeries,
+                    Name = $"Attribute {i + 1}"
+                };
+
+                seriesCollection.Add(boxSeries);
+            }
+        }
+
         //读取数据
         public List<float[]> ExtractData()
         {
@@ -228,7 +251,7 @@ namespace GeoTectAI.ViewModels.Pages
                 }
                 extractedData.Add(rowData.ToArray());
             }
-
+            //PlotBoxSeries(extractedData, SeriesCollection);
             return extractedData;
         }
 

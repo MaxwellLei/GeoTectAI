@@ -114,6 +114,9 @@ namespace GeoTectAI.ViewModels.Pages
         private ObservableCollection<Axis> _xOneAxes;
 
         [ObservableProperty]
+        private ObservableCollection<Axis> _yOneAxes;
+
+        [ObservableProperty]
         private SolidColorPaint _legendTextPaint = new SolidColorPaint(SKColors.DeepSkyBlue);
 
         private bool _isInitialized = false;
@@ -133,14 +136,79 @@ namespace GeoTectAI.ViewModels.Pages
             LiveCharts.Configure(config => config.HasGlobalSKTypeface(SKFontManager.Default.MatchCharacter('汉')));
         }
 
+        // 空值判断
+        public bool ArePropertiesValid()
+        {
+            int nullCount = 0;
+            int totalCount = 23; // 属性总数
+
+            if (SiO2 == 0) nullCount++;
+            if (TiO2 == 0) nullCount++;
+            if (Al2O3 == 0) nullCount++;
+            if (CaO == 0) nullCount++;
+            if (MgO == 0) nullCount++;
+            if (MnO == 0) nullCount++;
+            if (K2O == 0) nullCount++;
+            if (Na2O == 0) nullCount++;
+            if (P2O5 == 0) nullCount++;
+            if (La == 0) nullCount++;
+            if (Ce == 0) nullCount++;
+            if (Pr == 0) nullCount++;
+            if (Nd == 0) nullCount++;
+            if (Sm == 0) nullCount++;
+            if (Eu == 0) nullCount++;
+            if (Gd == 0) nullCount++;
+            if (Tb == 0) nullCount++;
+            if (Dy == 0) nullCount++;
+            if (Ho == 0) nullCount++;
+            if (Er == 0) nullCount++;
+            if (Tm == 0) nullCount++;
+            if (Yb == 0) nullCount++;
+            if (Lu == 0) nullCount++;
+
+            // 如果空值数量超过总数的一半，返回false，否则返回true
+            return nullCount <= totalCount / 2;
+        }
+
+
+        public ObservableCollection<ISeries> ScaleSeries(ObservableCollection<ISeries> tempSeries)
+        {
+            foreach (var series in tempSeries)
+            {
+                if (series.Values != null)
+                {
+                    var values = series.Values.Cast<double>().ToList();
+                    if (values.Count > 0)
+                    {
+                        double min = values.Min();
+                        double max = values.Max();
+
+                        if (min != max)
+                        {
+                            var scaledValues = values.Select(v => (v - min) / (max - min)).ToList();
+                            series.Values = scaledValues;
+                        }
+                        else
+                        {
+                            // 如果最小值和最大值相等，将所有值设置为 0.5
+                            var scaledValues = values.Select(v => 0.5).ToList();
+                            series.Values = scaledValues;
+                        }
+                    }
+                }
+            }
+            return tempSeries;
+        }
+
         //堆折线图绘图
         private void PaintStackedLineChart(ObservableCollection<ISeries> tempSeries)
         {
             // 构造环境名称
             ObservableCollection<string> Categories = new ObservableCollection<string>
-            { "1", "2", "3", "4", "5", "6", "7"};
+            { "AC", "CF", "CM", "IV", "OI", "RV", "SM"};
 
-            MyChartSeries = tempSeries;
+
+            MyChartSeries = ScaleSeries(tempSeries);
 
             XAxes = new ObservableCollection<Axis>
             {
@@ -163,10 +231,22 @@ namespace GeoTectAI.ViewModels.Pages
         //夜莺玫瑰绘图
         private void PaintNightingaleRoseChart(ObservableCollection<ISeries> basicBarsSeries)
         {
+            // 构造环境名称
+            ObservableCollection<string> Categories = new ObservableCollection<string>
+            { "AC", "CF", "CM", "IV", "OI", "RV", "SM"};
 
             MyNightingaleRoseChartSeries = basicBarsSeries;
 
             XOneAxes = new ObservableCollection<Axis>
+            {
+                new Axis
+                {
+                    Labels = Categories,
+                    LabelsPaint = new SolidColorPaint(SKColors.DeepSkyBlue)
+                }
+            };
+
+            YOneAxes = new ObservableCollection<Axis>
             {
                 new Axis
                 {
@@ -197,59 +277,67 @@ namespace GeoTectAI.ViewModels.Pages
         [RelayCommand]
         private async void OnPredict()
         {
-            //加载进度条
-            IsLoadVisible = Visibility.Visible;
-            // 获取当前程序路径
-            string appPath = System.IO.Directory.GetCurrentDirectory();
-
-            // 路径字典，方便根据ModelIndex索引模型
-            var models = new Dictionary<int, (string path, string name)>
+            if (ArePropertiesValid())
             {
-                { 3, (appPath + "\\Resources\\ML_Model\\ANN_model.onnx", "ANN") },
-                { 1, (appPath + "\\Resources\\ML_Model\\RandomForest_model.onnx", "Random Forest") },
-                { 2, (appPath + "\\Resources\\ML_Model\\XGBoosting_model.onnx", "XGBooting") },
-            };
+                //加载进度条
+                IsLoadVisible = Visibility.Visible;
+                // 获取当前程序路径
+                string appPath = System.IO.Directory.GetCurrentDirectory();
 
-            // 预测数据
-            var norm_features = new float[] { SiO2, TiO2, Al2O3, CaO, MgO, MnO, K2O, Na2O, P2O5, La, Ce, Pr, Nd, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu };
-            var preprocessor = new DataPreprocessor();
-            var features = preprocessor.NormalizeFeatures(norm_features);
-
-            // 预测服务
-            string predictExePath = appPath + "\\Executables\\predict.exe";
-            PredictorService predictorService = new PredictorService(predictExePath);
-
-            // 生成图表数据
-            ObservableCollection<ISeries> tempSeries = new ObservableCollection<ISeries>();
-            ObservableCollection<ISeries> preClassSeries = new ObservableCollection<ISeries>();
-
-            if (ModelIndex == 0)
-            {
-                foreach (var model in models.Values)
+                // 路径字典，方便根据ModelIndex索引模型
+                var models = new Dictionary<int, (string path, string name)>
                 {
+                    { 3, (appPath + "\\Resources\\ML_Model\\ANN_model.onnx", "ANN") },
+                    { 1, (appPath + "\\Resources\\ML_Model\\RandomForest_model.onnx", "Random Forest") },
+                    { 2, (appPath + "\\Resources\\ML_Model\\XGBoosting_model.onnx", "XGBooting") },
+                };
+
+                // 预测数据
+                var norm_features = new float[] { SiO2, TiO2, Al2O3, CaO, MgO, MnO, K2O, Na2O, P2O5, La, Ce, Pr, Nd, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu };
+                var preprocessor = new DataPreprocessor();
+                var features = preprocessor.NormalizeFeatures(norm_features);
+
+                // 预测服务
+                string predictExePath = appPath + "\\Executables\\predict.exe";
+                PredictorService predictorService = new PredictorService(predictExePath);
+
+                // 生成图表数据
+                ObservableCollection<ISeries> tempSeries = new ObservableCollection<ISeries>();
+                ObservableCollection<ISeries> preClassSeries = new ObservableCollection<ISeries>();
+
+                if (ModelIndex == 0)
+                {
+                    foreach (var model in models.Values)
+                    {
+                        var (predictedClass, probabilities) = await predictorService.PredictAsync(model.path, features);
+                        AddToSeries(preClassSeries, predictedClass, model.name);
+                        AddToSeries(tempSeries, probabilities, model.name);
+                    }
+                }
+                else if (models.ContainsKey(ModelIndex))
+                {
+                    var model = models[ModelIndex];
                     var (predictedClass, probabilities) = await predictorService.PredictAsync(model.path, features);
                     AddToSeries(preClassSeries, predictedClass, model.name);
                     AddToSeries(tempSeries, probabilities, model.name);
                 }
-            }
-            else if (models.ContainsKey(ModelIndex))
-            {
-                var model = models[ModelIndex];
-                var (predictedClass, probabilities) = await predictorService.PredictAsync(model.path, features);
-                AddToSeries(preClassSeries, predictedClass, model.name);
-                AddToSeries(tempSeries, probabilities, model.name);
+                else
+                {
+                    MessageService.AutoShowDialog(LanguageService.Instance["Error"], LanguageService.Instance["Error_4"], ControlAppearance.Danger);
+                }
+
+                // 绘制图表
+                PaintStackedLineChart(tempSeries);
+                PaintNightingaleRoseChart(preClassSeries);
+
+                IsLoadVisible = Visibility.Hidden;
+                MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_3"], ControlAppearance.Success);
+            
             }
             else
             {
-                MessageService.AutoShowDialog(LanguageService.Instance["Error"], LanguageService.Instance["Error_4"], ControlAppearance.Danger);
+                MessageService.AutoShowDialog(LanguageService.Instance["Error"], LanguageService.Instance["Error_6"], ControlAppearance.Danger);
             }
-
-            // 绘制图表
-            PaintStackedLineChart(tempSeries);
-            PaintNightingaleRoseChart(preClassSeries);
-
-            IsLoadVisible = Visibility.Hidden;
-            MessageService.AutoShowDialog(LanguageService.Instance["Success"], LanguageService.Instance["Success_3"], ControlAppearance.Success);
         }
     }
 }

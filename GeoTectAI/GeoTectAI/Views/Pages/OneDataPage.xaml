@@ -221,14 +221,17 @@
               Height="280">
                 <lvc:CartesianChart Series="{Binding ViewModel.MyNightingaleRoseChartSeries}"
                                     XAxes="{Binding ViewModel.XOneAxes}"
-                                    LegendPosition="Right" LegendTextSize="12"/>
+                                    YAxes="{Binding ViewModel.YOneAxes}"
+                                    LegendTextPaint="{Binding ViewModel.LegendTextPaint}"
+                                    LegendPosition="Right" LegendTextSize="14"/>
             </Border>
             <Border Grid.Column="2" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" Margin="0 0 0 10"
               BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" CornerRadius="10"
               Height="280">
                 <ScrollViewer>
                     <StackPanel Margin="20">
-                        <TextBlock FontSize="20" FontWeight="Bold"  Text="{Binding [Category_Mapping],Source={x:Static lg:LanguageService.Instance}}"/>
+                        <TextBlock FontSize="20" FontWeight="Bold" TextWrapping="Wrap"
+                                   Text="{Binding [Category_Mapping],Source={x:Static lg:LanguageService.Instance}}"/>
                         <TextBlock Text="1: Archean Cratons" TextWrapping="Wrap"
                                    Margin="0 3" FontWeight="Bold"/>
                         <TextBlock Text="2: Continental Flood Basalts" TextWrapping="Wrap"

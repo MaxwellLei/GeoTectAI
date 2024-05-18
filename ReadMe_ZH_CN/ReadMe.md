@@ -2,7 +2,7 @@
 
 本项目基于 MVVM 架构，使用 WPF 开发技术，依赖于 `.NET7` 框架，你可以通过旁边的 Releases 下载安装使用，项目是**基于岩浆岩的全岩地球化学元素来预测其对应的大地构造环境**。
 
-感谢如下项目依赖库，如果你希望编译本项目请先安装如下库支持。
+感谢如下项目依赖库，如果你希望编译本项目或者二次开发，请先安装如下库支持。
 
 * [CommunityToolkit.Mvvm](https://www.nuget.org/packages/CommunityToolkit.Mvvm)
 * [EPPlus](https://www.epplussoftware.com/)
@@ -12,7 +12,7 @@
 * [WPF-UI](https://wpfui.lepo.co/index.html)
 * [LiveCharts2](https://github.com/beto-rodriguez/LiveCharts2)
 
-你可以在 Releases 中找到软件安装包，关于命名说明：
+你可以在 Releases 中找到软件安装包，关于软件的命名说明：
 
 * **DependencyFramework_FullPlatform** 表示可以**运行在 Windows,Linux,MacOS上**，但是**依赖 `.NET7` 框架**，意味着你如果希望运行这个程序，你需要先下载安装 `.NET7` 框架后才可运行。
 * **independence_win_x86** 表示**仅运行在 Windows 平台上，不依赖于 .NET7 框架**，你可以直接下载解压运行使用。

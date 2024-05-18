@@ -146,19 +146,19 @@
     <value>全岩主量元素</value>
   </data>
   <data name="WholeRock_ME_D" xml:space="preserve">
-    <value>构成岩石的主要化学元素</value>
+    <value>火成岩的主要化学元素</value>
   </data>
   <data name="WholeRock_TE" xml:space="preserve">
     <value>全岩微量元素</value>
   </data>
   <data name="WholeRock_TE_D" xml:space="preserve">
-    <value>构成岩石的微量化学元素</value>
+    <value>火成岩的微量化学元素</value>
   </data>
   <data name="Prediction_Res" xml:space="preserve">
     <value>预测结果</value>
   </data>
   <data name="Category_Mapping" xml:space="preserve">
-    <value>类别映射</value>
+    <value>构造环境映射关系</value>
   </data>
   <data name="Integration" xml:space="preserve">
     <value>综合</value>
@@ -182,7 +182,7 @@
     <value>数据统计</value>
   </data>
   <data name="Export_As_Excel" xml:space="preserve">
-    <value>导出为 Excel</value>
+    <value>导出为 Excel 文件</value>
   </data>
   <data name="Open_File_Location" xml:space="preserve">
     <value>打开文件位置</value>
@@ -209,7 +209,7 @@
     <value>自动关闭</value>
   </data>
   <data name="Automatic_S_Time_D" xml:space="preserve">
-    <value>消息关闭时间（仅静默通知有效）</value>
+    <value>消息持续时间（仅静默通知下有效）</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>关于</value>
@@ -227,7 +227,7 @@
     <value>深色</value>
   </data>
   <data name="About_D" xml:space="preserve">
-    <value>根据您的岩浆岩全岩地球化学元素预测大地构造环境</value>
+    <value>根据您的火成岩全岩地球化学元素数据预测对应的大地构造环境</value>
   </data>
   <data name="Project_Support" xml:space="preserve">
     <value>项目依赖支持</value>
@@ -297,5 +297,17 @@
   </data>
   <data name="Mapping_Match_P2" xml:space="preserve">
     <value>严格映射</value>
+  </data>
+  <data name="Home_D_1" xml:space="preserve">
+    <value>该应用程序利用火成岩的全岩地球化学元素来确定其构造环境，而无需机器学习知识。您可以使用左侧边栏进行功能选择。</value>
+  </data>
+  <data name="Home_D_2" xml:space="preserve">
+    <value>本应用的机器学习模型的训练数据分布如下图所示。可区分的构造环境类别如图 2 所示。</value>
+  </data>
+  <data name="Error_6" xml:space="preserve">
+    <value>输入值超过半数为空，请检查输入数据</value>
+  </data>
+  <data name="Project_Location" xml:space="preserve">
+    <value>开源项目地址</value>
   </data>
 </root>

@@ -52,7 +52,8 @@
             <ui:CardControl.Header>
                 <StackPanel>
                     <TextBlock Text="{Binding [Languages],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding [Languages_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
+                    <TextBlock Text="{Binding [Languages_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"
+                               TextWrapping="Wrap"/>
                 </StackPanel>
             </ui:CardControl.Header>
             <ui:CardControl.Content>
@@ -123,7 +124,8 @@
             <ui:CardControl.Header>
                 <StackPanel>
                     <TextBlock Text="{Binding [Mapping_Match],Source={x:Static lg:LanguageService.Instance}}" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding [Mapping_Match_D], Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
+                    <TextBlock Text="{Binding [Mapping_Match_D], Source={x:Static lg:LanguageService.Instance}}" 
+                               FontSize="12" TextWrapping="Wrap"/>
                 </StackPanel>
             </ui:CardControl.Header>
             <ui:CardControl.Content>
@@ -153,7 +155,8 @@
                 <Grid>
                     <StackPanel>
                         <TextBlock Text="GeoTectAI" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding [About_D],Source={x:Static lg:LanguageService.Instance}}" FontSize="12"/>
+                        <TextBlock Text="{Binding [About_D],Source={x:Static lg:LanguageService.Instance}}" 
+                                   FontSize="12" TextWrapping="Wrap"/>
                     </StackPanel>
                     <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
                         <TextBlock Text="{Binding [Version],Source={x:Static lg:LanguageService.Instance}}"  VerticalAlignment="Center"/>
@@ -164,6 +167,10 @@
             <ui:CardExpander.Content>
                 <StackPanel>
                     <StackPanel>
+                        <WrapPanel>
+                            <TextBlock Text="{Binding [Project_Location],Source={x:Static lg:LanguageService.Instance}}" Margin="0 5 5 5"/>
+                            <ui:Hyperlink Content="GeoTectAI" NavigateUri="https://github.com/MaxwellLei/GeoTectAI"/>
+                        </WrapPanel>
                         <TextBlock Text="{Binding [Project_Support],Source={x:Static lg:LanguageService.Instance}}" Margin="0 5"/>
                         <WrapPanel>
                             <ui:Hyperlink Content="WPF-UI" NavigateUri="https://wpfui.lepo.co/index.html"/>
