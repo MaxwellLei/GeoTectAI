@@ -27,7 +27,7 @@ If you have any bugs in the process of use, you can leave a message under **Issu
 
 ## Datasets
 
-The project training machine learning model data comes from two large geochemical databases [PetDB](http://www.earthchem.org/petdb) and [GEOROC](http://georoc.mpch-mainz.gwdg.de/georoc /) (🌹**Thanks to the database and many researchers for providing data support**🌹), the training data set of this project is stored in the `DataSet` file of the project.
+The project training machine learning model data comes from two large geochemical databases [PetDB](http://www.earthchem.org/petdb) and [GEOROC](http://georoc.mpch-mainz.gwdg.de/georoc/) (🌹**Thanks to the database and many researchers for providing data support**🌹), the training data set of this project is stored in the `DataSet` file of the project.
 
 > If you have any other needs or questions, please contact me by private message.
 
